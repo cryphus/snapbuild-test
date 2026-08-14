@@ -7,11 +7,11 @@ import './UseCases.css'
 function UseCases() {
   const ref = useReveal<HTMLElement>()
   const [index, setIndex] = useState(0)
-  // Кейсы, для которых файла рендера ещё нет — показываем подложку из макета
+  // Кейсы, для которых файла рендера нет — тогда показываем подложку
   const [missingRenders, setMissingRenders] = useState<string[]>([])
 
   const active = useCases.items[index]
-  const hasRender = !missingRenders.includes(active.render)
+  const activeHasRender = !missingRenders.includes(active.render)
 
   return (
     <section className="cases reveal" id="scenarios" ref={ref}>
@@ -43,23 +43,26 @@ function UseCases() {
           })}
         </div>
 
-        {/* В превью только рендер — без плашек и подписей */}
-        <div className="cases__preview" style={{ background: active.gradient }}>
-          <div className={`cases__canvas${hasRender ? ' has-render' : ''}`} key={index}>
-            {hasRender && (
-              <img
-                className="cases__render"
-                src={renderAsset(active.render)}
-                alt={`3D-рендер: ${active.title}`}
-                loading="lazy"
-                onError={() =>
-                  setMissingRenders((prev) =>
-                    prev.includes(active.render) ? prev : [...prev, active.render],
-                  )
-                }
-              />
-            )}
-          </div>
+        {/*
+          Все рендеры лежат в разметке и грузятся, когда секция доходит до
+          экрана: переключение кейса не ждёт загрузки и идёт плавно.
+        */}
+        <div className={`cases__preview${activeHasRender ? ' has-render' : ''}`}>
+          {useCases.items.map((item, i) => (
+            <img
+              key={item.render}
+              className={`cases__render${i === index ? ' is-active' : ''}`}
+              src={renderAsset(item.render)}
+              alt={i === index ? `3D-рендер: ${item.title}` : ''}
+              loading="lazy"
+              decoding="async"
+              onError={() =>
+                setMissingRenders((prev) =>
+                  prev.includes(item.render) ? prev : [...prev, item.render],
+                )
+              }
+            />
+          ))}
         </div>
       </div>
     </section>

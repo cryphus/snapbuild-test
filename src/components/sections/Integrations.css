@@ -58,9 +58,16 @@
   opacity: 0.5;
 }
 
+/*
+  Четыре колонки, а не auto-fit: восемь карточек делятся ровно на две
+  строки. При auto-fit на широком экране получалось пять колонок, и
+  вторая строка оставалась неполной. grid-auto-rows выравнивает строки
+  между собой, чтобы карточки не были разной высоты.
+*/
 .integr__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
   gap: calc(20 * var(--sp));
 }
 
@@ -165,6 +172,10 @@
     font-size: calc(40 * var(--sp));
   }
 
+  .integr__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .integr__card {
     padding: calc(20 * var(--sp));
   }
@@ -191,6 +202,7 @@
 
   .integr__grid {
     grid-template-columns: 1fr;
+    grid-auto-rows: auto;
   }
 }
 
