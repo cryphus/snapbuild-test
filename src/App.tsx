@@ -1,22 +1,32 @@
+import Header from './components/layout/Header'
+import Footer from './components/layout/Footer'
+import Hero from './components/sections/Hero'
+import TrustLogos from './components/sections/TrustLogos'
+import Platform from './components/sections/Platform'
+import UseCasesDemo from './components/sections/UseCasesDemo'
+import Compare from './components/sections/Compare'
+import Security from './components/sections/Security'
+import Roadmap from './components/sections/Roadmap'
+import Faq from './components/sections/Faq'
+import FinalCta from './components/sections/FinalCta'
+
 function App() {
   return (
-    <main className="section">
-      <div className="container">
-        <p className="section__eyebrow">снэпбилд</p>
-        <h1>Расширение лендинга снэпбилд</h1>
-        <p className="section__lead">
-          Секции добавляются по мере реализации плана.
-        </p>
-        <div style={{ display: 'flex', gap: 12, marginTop: 24 }}>
-          <button className="btn btn-primary" type="button">
-            Начать сейчас
-          </button>
-          <button className="btn btn-outline" type="button">
-            Подробнее
-          </button>
-        </div>
-      </div>
-    </main>
+    <>
+      <Header />
+      <main>
+        <Hero />
+        <TrustLogos />
+        <Platform />
+        <UseCasesDemo />
+        <Compare />
+        <Security />
+        <Roadmap />
+        <Faq />
+        <FinalCta />
+      </main>
+      <Footer />
+    </>
   )
 }
 

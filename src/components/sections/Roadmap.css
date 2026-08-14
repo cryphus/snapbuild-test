@@ -1,0 +1,36 @@
+.roadmap__scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+}
+
+.roadmap__track {
+  display: flex;
+  gap: 20px;
+  padding-inline: var(--container-padding);
+  width: max-content;
+}
+
+.roadmap__card {
+  width: 280px;
+  padding: 24px;
+  flex-shrink: 0;
+}
+
+.roadmap__date {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: 12px;
+}
+
+.roadmap__card h3 {
+  margin-bottom: 8px;
+  font-size: 1.0625rem;
+}
+
+.roadmap__card p {
+  color: var(--color-neutral-500);
+  font-size: 0.9375rem;
+}

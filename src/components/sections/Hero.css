@@ -1,0 +1,17 @@
+.hero__inner {
+  max-width: 860px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.hero__subtitle {
+  margin-top: 20px;
+  font-size: 1.125rem;
+  color: var(--color-neutral-500);
+}
+
+.hero__cta {
+  margin-top: 32px;
+  padding: 14px 28px;
+  font-size: 1rem;
+}

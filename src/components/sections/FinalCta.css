@@ -1,0 +1,15 @@
+.final-cta__inner {
+  max-width: 700px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.final-cta__inner .section__lead {
+  margin-inline: auto;
+}
+
+.final-cta__button {
+  margin-top: 28px;
+  padding: 14px 28px;
+  font-size: 1rem;
+}

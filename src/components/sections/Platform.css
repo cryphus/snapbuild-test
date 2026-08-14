@@ -1,0 +1,24 @@
+.platform__grid {
+  display: grid;
+  gap: var(--grid-gap);
+  grid-template-columns: 1fr;
+}
+
+.platform__card {
+  padding-top: 20px;
+  border-top: 1px solid var(--color-divider);
+}
+
+.platform__card h3 {
+  margin-bottom: 8px;
+}
+
+.platform__card p {
+  color: var(--color-neutral-500);
+}
+
+@media (min-width: 768px) {
+  .platform__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

@@ -1,0 +1,43 @@
+.compare__scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.compare__table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.compare__table th,
+.compare__table td {
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-divider);
+  white-space: nowrap;
+}
+
+.compare__table thead th {
+  color: var(--color-text-muted);
+  font-weight: 500;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.compare__table tbody th {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.compare__table td {
+  color: var(--color-neutral-500);
+}
+
+.compare__col-main {
+  color: var(--color-text) !important;
+  font-weight: 700 !important;
+  background: var(--card-bg);
+  border-radius: 12px 12px 0 0;
+}

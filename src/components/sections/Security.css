@@ -1,0 +1,24 @@
+.security__grid {
+  display: grid;
+  gap: var(--grid-gap);
+  grid-template-columns: 1fr;
+}
+
+.security__card {
+  padding: 28px;
+}
+
+.security__card h3 {
+  margin-bottom: 8px;
+  font-size: 1.125rem;
+}
+
+.security__card p {
+  color: var(--color-neutral-500);
+}
+
+@media (min-width: 768px) {
+  .security__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
