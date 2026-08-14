@@ -8,7 +8,7 @@ function Pricing() {
   const [period, setPeriod] = useState<BillingPeriod>('monthly')
 
   return (
-    <section className="pricing section reveal" id="pricing">
+    <section className="pricing section" id="pricing">
       <div className="container">
         <div className="section__header section__header--center">
           <p className="section__eyebrow">{pricing.eyebrow}</p>

@@ -62,7 +62,7 @@ function ContactForm() {
   }
 
   return (
-    <section className="contact-form section reveal" id="contact">
+    <section className="contact-form section" id="contact">
       <div className="container">
         <div className="section__header section__header--center">
           <p className="section__eyebrow">{contactForm.eyebrow}</p>

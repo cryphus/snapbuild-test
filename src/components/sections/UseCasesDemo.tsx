@@ -16,7 +16,7 @@ function UseCasesDemo() {
   }
 
   return (
-    <section className="tabs reveal" id="use-cases">
+    <section className="tabs" id="use-cases">
       <div className="tabs__header">
         <h2 className="tabs__title">{useCasesDemo.title}</h2>
 

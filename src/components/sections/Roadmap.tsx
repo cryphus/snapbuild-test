@@ -32,7 +32,7 @@ function Roadmap() {
   }
 
   return (
-    <section className="rmap reveal" id="roadmap">
+    <section className="rmap" id="roadmap">
       <div className="rmap__header">
         <p className="rmap__eyebrow">{roadmap.eyebrow}</p>
         <h2 className="rmap__title">{roadmap.title}</h2>

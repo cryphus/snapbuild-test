@@ -4,7 +4,7 @@ import './Platform.css'
 
 function Platform() {
   return (
-    <section className="steps reveal" id="process">
+    <section className="steps" id="process">
       <div className="steps__header">
         <h2 className="steps__title">{platform.title}</h2>
         <p className="steps__subtitle">{platform.lead}</p>

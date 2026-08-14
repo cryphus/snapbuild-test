@@ -6,7 +6,7 @@ function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   return (
-    <section className="faq reveal" id="faq">
+    <section className="faq" id="faq">
       <div className="faq__header">
         <h2 className="faq__title">{faq.title}</h2>
         <p className="faq__lead">{faq.lead}</p>

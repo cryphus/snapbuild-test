@@ -3,7 +3,7 @@ import './UseCases.css'
 
 function UseCases() {
   return (
-    <section className="use-cases section reveal" id="scenarios">
+    <section className="use-cases section" id="scenarios">
       <div className="container">
         <div className="section__header">
           <p className="section__eyebrow">{useCases.eyebrow}</p>

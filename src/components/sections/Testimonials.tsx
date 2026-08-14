@@ -12,7 +12,7 @@ function Testimonials() {
   }
 
   return (
-    <section className="testimonials section reveal" id="testimonials">
+    <section className="testimonials section" id="testimonials">
       <div className="container">
         <div className="section__header section__header--center">
           <p className="section__eyebrow">{testimonials.eyebrow}</p>

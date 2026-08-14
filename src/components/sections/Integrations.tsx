@@ -3,7 +3,7 @@ import './Integrations.css'
 
 function Integrations() {
   return (
-    <section className="integrations section reveal" id="integrations">
+    <section className="integrations section" id="integrations">
       <div className="container">
         <div className="section__header section__header--center">
           <p className="section__eyebrow">{integrations.eyebrow}</p>

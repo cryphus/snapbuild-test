@@ -48,15 +48,15 @@
   display: none;
 }
 
+/*
+  Логотипы выходят по очереди, как в оригинале. Анимация запускается по
+  таймеру при загрузке, а не по попаданию в вьюпорт: гарантированно
+  доигрывает и не может оставить полосу пустой.
+*/
 @media (min-width: 768px) {
   .trust__item {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-
-  .trust.is-revealed .trust__item {
     animation: logo-reveal 520ms var(--ease) both;
-    animation-delay: calc(var(--logo-index, 0) * 90ms);
+    animation-delay: calc(300ms + var(--logo-index, 0) * 90ms);
   }
 }
 

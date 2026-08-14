@@ -4,7 +4,7 @@ import './Security.css'
 
 function Security() {
   return (
-    <section className="safe reveal" id="features">
+    <section className="safe" id="features">
       <div className="safe__hero">
         <h2 className="safe__title">
           <span>Безопасность</span>

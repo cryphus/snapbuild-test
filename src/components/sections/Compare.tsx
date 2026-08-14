@@ -3,7 +3,7 @@ import './Compare.css'
 
 function Compare() {
   return (
-    <section className="compare reveal" id="compare">
+    <section className="compare" id="compare">
       <div className="compare__header">
         <h2 className="compare__title">{compare.title}</h2>
         <p className="compare__lead">{compare.lead}</p>
