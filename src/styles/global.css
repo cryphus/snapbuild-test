@@ -31,23 +31,7 @@ h6 {
   font-family: var(--font-primary);
   line-height: 1.15;
   letter-spacing: -0.01em;
-}
-
-h1 {
-  font-size: clamp(2.25rem, 1.6rem + 2.6vw, 4.2rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-}
-
-h2 {
-  font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.9rem);
-  font-weight: 700;
-}
-
-h3 {
-  font-size: 1.375rem;
-  font-weight: 600;
-  line-height: 1.2;
+  font-weight: 500;
 }
 
 p {
@@ -76,55 +60,74 @@ svg {
   max-width: 100%;
 }
 
-/* Контейнер по образцу исходного лендинга */
+/* Секции оригинала — флюидные боковые отступы, без общего контейнера */
+.section {
+  padding: calc(96 * var(--sp)) var(--gutter);
+  scroll-margin-top: calc(90 * var(--sp));
+}
+
+/* Вспомогательные классы для добавленных секций — на той же флюидной шкале */
 .container {
   width: 100%;
-  max-width: var(--container-max-width);
   margin-inline: auto;
-  padding-inline: var(--container-padding);
-}
-
-/* Секция: базовые вертикальные отступы, как на исходном сайте */
-.section {
-  padding-block: clamp(48px, 8vw, 96px);
-  scroll-margin-top: 84px;
-}
-
-.section--tight {
-  padding-block: clamp(32px, 5vw, 56px);
-}
-
-.section--alt {
-  background: var(--color-bg-alt);
-}
-
-.section__eyebrow {
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-  margin-bottom: 12px;
-}
-
-.section__lead {
-  color: var(--color-neutral-500);
-  font-size: 1.125rem;
-  max-width: 640px;
-  margin-top: 16px;
 }
 
 .section__header {
-  margin-bottom: clamp(32px, 5vw, 56px);
+  margin-bottom: calc(40 * var(--sp));
 }
 
 .section__header--center {
   text-align: center;
+  max-width: calc(760 * var(--sp));
   margin-inline: auto;
+  margin-bottom: calc(40 * var(--sp));
+}
+
+.section__header h2 {
+  font-weight: 500;
+  font-size: calc(52 * var(--sp));
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.section__eyebrow {
+  font-size: calc(14 * var(--sp));
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: calc(12 * var(--sp));
+}
+
+.section__lead {
+  margin-top: calc(16 * var(--sp));
+  max-width: calc(640 * var(--sp));
+  color: var(--color-text-secondary);
+  font-size: calc(16 * var(--sp));
 }
 
 .section__header--center .section__lead {
   margin-inline: auto;
+}
+
+@media (max-width: 1023px) {
+  .section__header h2 {
+    font-size: calc(40 * var(--sp));
+  }
+}
+
+@media (max-width: 767px) {
+  .section__header h2 {
+    font-size: calc(30 * var(--sp));
+  }
+}
+
+/* Текст, залитый фирменным градиентом */
+.brand-text {
+  background: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 /* Кнопки */
@@ -135,17 +138,13 @@ svg {
   gap: 8px;
   border: none;
   border-radius: var(--btn-radius);
-  padding: 12px 24px;
-  font-size: 0.9375rem;
+  padding: calc(12 * var(--sp)) calc(24 * var(--sp));
+  font-size: calc(14 * var(--sp));
   font-weight: 600;
   letter-spacing: -0.01em;
   white-space: nowrap;
   transition: background-color var(--transition-fast), color var(--transition-fast),
     border-color var(--transition-fast), transform var(--transition-fast);
-}
-
-.btn:active {
-  transform: scale(0.97);
 }
 
 .btn-primary {
@@ -155,6 +154,7 @@ svg {
 
 .btn-primary:hover {
   background: var(--btn-bg-hover);
+  transform: translateY(-1px);
 }
 
 .btn-outline {
@@ -167,7 +167,23 @@ svg {
   border-color: var(--color-neutral-900);
 }
 
-.btn:focus-visible {
+/* Белая кнопка с градиентным текстом — используется на цветных подложках */
+.btn-on-brand {
+  background: #ffffff;
+  border-radius: calc(24 * var(--sp));
+  padding: calc(14 * var(--sp)) calc(22 * var(--sp));
+  font-size: calc(14 * var(--sp));
+  font-weight: 600;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.btn-on-brand:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn:focus-visible,
+a:focus-visible {
   outline: 2px solid #5e84fc;
   outline-offset: 2px;
 }
@@ -179,7 +195,23 @@ svg {
   border-radius: var(--card-radius);
 }
 
-/* Скрытие для скринридеров без выпадения из потока фокуса */
+/*
+  Появление секций при прокрутке — механика и кривая взяты с оригинала.
+  Скрытое состояние включается только когда скрипт выставил класс
+  js-reveal на <html>: без JS страница остаётся полностью читаемой.
+*/
+.js-reveal .reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+  will-change: opacity, transform;
+}
+
+.js-reveal .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -196,4 +228,21 @@ svg {
 html,
 body {
   overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

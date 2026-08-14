@@ -1,36 +1,155 @@
-.roadmap__scroll {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 8px;
+.rmap {
+  padding: calc(77 * var(--sp)) 0 calc(40 * var(--sp));
+  scroll-margin-top: calc(90 * var(--sp));
 }
 
-.roadmap__track {
+.rmap__header {
+  padding-inline: var(--gutter);
+  margin-bottom: calc(40 * var(--sp));
+}
+
+.rmap__eyebrow {
+  color: var(--color-text-muted);
+  font-size: calc(14 * var(--sp));
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: calc(12 * var(--sp));
+}
+
+.rmap__title {
+  margin: 0;
+  font-weight: 500;
+  font-size: calc(52 * var(--sp));
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.rmap__scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  cursor: grab;
+}
+
+.rmap__scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.rmap__scroll.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
+.rmap__track {
   display: flex;
-  gap: 20px;
-  padding-inline: var(--container-padding);
+  gap: calc(20 * var(--sp));
+  padding-inline: var(--gutter);
   width: max-content;
 }
 
-.roadmap__card {
-  width: 280px;
-  padding: 24px;
+.rmap__item {
+  position: relative;
+  width: calc(280 * var(--sp));
   flex-shrink: 0;
+  padding-top: calc(28 * var(--sp));
 }
 
-.roadmap__date {
+/* Горизонтальная линия таймлайна, проходящая через все карточки */
+.rmap__item::before {
+  content: '';
+  position: absolute;
+  top: calc(6 * var(--sp));
+  left: 0;
+  right: calc(-20 * var(--sp));
+  height: 1px;
+  background: var(--color-divider);
+}
+
+.rmap__item:last-child::before {
+  right: 0;
+}
+
+.rmap__marker {
+  position: absolute;
+  top: calc(6 * var(--sp));
+  left: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Точка на линии: ядро с фирменным градиентом и мягкое свечение вокруг */
+.rmap__dot-core,
+.rmap__dot-halo {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--brand-gradient-diag);
+}
+
+.rmap__dot-core {
+  width: calc(6 * var(--sp));
+  height: calc(6 * var(--sp));
+  transform: translate(-50%, -50%);
+}
+
+.rmap__dot-halo {
+  width: calc(16 * var(--sp));
+  height: calc(16 * var(--sp));
+  transform: translate(-50%, -50%);
+  opacity: 0.25;
+  filter: blur(2px);
+}
+
+.rmap__date {
   display: inline-block;
-  font-size: 0.8125rem;
+  font-size: calc(13 * var(--sp));
   font-weight: 600;
   color: var(--color-text-muted);
-  margin-bottom: 12px;
+  margin-bottom: calc(10 * var(--sp));
 }
 
-.roadmap__card h3 {
-  margin-bottom: 8px;
-  font-size: 1.0625rem;
+.rmap__name {
+  margin: 0 0 calc(8 * var(--sp));
+  font-weight: 500;
+  font-size: calc(18 * var(--sp));
+  line-height: 1.3;
+  letter-spacing: -0.01em;
 }
 
-.roadmap__card p {
-  color: var(--color-neutral-500);
-  font-size: 0.9375rem;
+.rmap__desc {
+  color: var(--color-text-secondary);
+  font-size: calc(15 * var(--sp));
+  line-height: 1.45;
+}
+
+@media (max-width: 1023px) {
+  .rmap {
+    padding-block: calc(56 * var(--sp)) calc(32 * var(--sp));
+  }
+
+  .rmap__title {
+    font-size: calc(40 * var(--sp));
+  }
+
+  .rmap__item {
+    width: calc(260 * var(--sp));
+  }
+}
+
+@media (max-width: 767px) {
+  .rmap__title {
+    font-size: calc(30 * var(--sp));
+  }
+
+  .rmap__item {
+    width: calc(240 * var(--sp));
+  }
+
+  .rmap__name {
+    font-size: calc(17 * var(--sp));
+  }
+
+  .rmap__desc {
+    font-size: calc(14 * var(--sp));
+  }
 }

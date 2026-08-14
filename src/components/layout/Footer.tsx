@@ -1,13 +1,14 @@
 import { footer } from '../../data/siteContent'
+import { images } from '../../data/assets'
 import './Footer.css'
 
 function Footer() {
   return (
     <footer className="footer">
-      <div className="container footer__inner">
+      <div className="footer__inner">
         <div className="footer__brand">
-          <a href="/" className="footer__logo">
-            снэпбилд
+          <a href="#hero" className="footer__logo">
+            <img src={images.logo} alt="Снэпбилд" />
           </a>
           <p>{footer.tagline}</p>
         </div>
@@ -55,7 +56,7 @@ function Footer() {
         </div>
       </div>
 
-      <div className="container footer__bottom">
+      <div className="footer__bottom">
         <p>{footer.copyright}</p>
       </div>
     </footer>

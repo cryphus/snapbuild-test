@@ -1,15 +1,188 @@
-.final-cta__inner {
-  max-width: 700px;
+.launch-wrap {
+  padding: calc(16 * var(--sp)) calc(16 * var(--sp)) calc(48 * var(--sp));
+}
+
+/*
+  Финальный CTA — вторая крупная градиентная карточка страницы.
+  Поверх градиента лежит текстура «пыли» с оригинала и два медленно
+  плывущих пятна, дающих ощущение живого фона.
+*/
+.launch {
+  position: relative;
+  overflow: hidden;
+  border-radius: calc(32 * var(--sp));
+  background-color: #fff;
+  background-image: var(--brand-surface-cta);
+  color: #000;
+  padding: calc(96 * var(--sp)) var(--gutter);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.launch__dust {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0.2;
+  mix-blend-mode: plus-lighter;
+  pointer-events: none;
+}
+
+.launch__dust img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.launch__blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.launch__blob--a {
+  width: calc(420 * var(--sp));
+  height: calc(420 * var(--sp));
+  top: -10%;
+  left: 4%;
+  background: radial-gradient(circle, rgba(255, 164, 182, 0.9), transparent 70%);
+  animation: cta-blob-a 18s ease-in-out infinite;
+}
+
+.launch__blob--b {
+  width: calc(380 * var(--sp));
+  height: calc(380 * var(--sp));
+  bottom: -12%;
+  right: 6%;
+  background: radial-gradient(circle, rgba(212, 214, 255, 0.95), transparent 70%);
+  animation: cta-blob-b 22s ease-in-out infinite;
+}
+
+@keyframes cta-blob-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(26%, 30%) scale(1.4);
+  }
+}
+
+@keyframes cta-blob-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-26%, -25%) scale(1.35);
+  }
+}
+
+.launch__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(32 * var(--sp));
+  max-width: calc(898 * var(--sp));
   margin-inline: auto;
+}
+
+.launch__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(16 * var(--sp));
+}
+
+.launch__title {
+  margin: 0;
   text-align: center;
+  color: #000;
+  font-weight: 600;
+  font-size: calc(52 * var(--sp));
+  line-height: 1.23;
+  letter-spacing: -0.02em;
 }
 
-.final-cta__inner .section__lead {
-  margin-inline: auto;
+.launch__subtitle {
+  text-align: center;
+  color: #000;
+  font-weight: 500;
+  font-size: calc(16 * var(--sp));
+  line-height: 1.5;
 }
 
-.final-cta__button {
-  margin-top: 28px;
-  padding: 14px 28px;
-  font-size: 1rem;
+.launch__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: calc(12 * var(--sp));
+}
+
+.launch__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: calc(24 * var(--sp));
+  padding: calc(14 * var(--sp)) calc(20 * var(--sp));
+  font-weight: 600;
+  font-size: calc(14 * var(--sp));
+  line-height: 1.43;
+  transition: transform 200ms var(--ease), box-shadow 200ms var(--ease);
+}
+
+.launch__btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.launch__btn--ghost {
+  background: rgba(255, 255, 255, 0.55);
+  color: #000;
+}
+
+@media (max-width: 1023px) {
+  .launch {
+    padding-block: calc(72 * var(--sp));
+    border-radius: calc(32 * var(--sp));
+  }
+
+  .launch__title {
+    font-size: calc(40 * var(--sp));
+  }
+}
+
+@media (max-width: 767px) {
+  .launch-wrap {
+    padding: calc(8 * var(--sp)) calc(8 * var(--sp)) calc(32 * var(--sp));
+  }
+
+  .launch {
+    padding-block: calc(56 * var(--sp));
+    border-radius: 16px;
+  }
+
+  .launch__title {
+    font-size: calc(28 * var(--sp));
+  }
+
+  .launch__subtitle {
+    font-size: calc(14 * var(--sp));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .launch__blob {
+    animation: none;
+  }
 }

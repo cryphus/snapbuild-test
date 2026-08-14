@@ -1,23 +1,60 @@
+import { useRef } from 'react'
 import { roadmap } from '../../data/siteContent'
+import { useReveal } from '../../hooks/useReveal'
 import './Roadmap.css'
 
 function Roadmap() {
+  const ref = useReveal<HTMLElement>()
+  const scrollerRef = useRef<HTMLDivElement>(null)
+
+  // Перетаскивание ленты мышью — как в оригинале
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== 'mouse') return
+    const scroller = scrollerRef.current
+    if (!scroller) return
+
+    const startX = e.pageX
+    const startLeft = scroller.scrollLeft
+    scroller.classList.add('is-dragging')
+
+    const onMove = (ev: PointerEvent) => {
+      scroller.scrollLeft = startLeft - (ev.pageX - startX)
+    }
+    const release = () => {
+      scroller.classList.remove('is-dragging')
+      window.removeEventListener('pointermove', onMove)
+      window.removeEventListener('pointerup', release)
+      window.removeEventListener('pointercancel', release)
+    }
+
+    window.addEventListener('pointermove', onMove)
+    window.addEventListener('pointerup', release)
+    window.addEventListener('pointercancel', release)
+    e.preventDefault()
+  }
+
   return (
-    <section className="roadmap section" id="roadmap">
-      <div className="container">
-        <div className="section__header">
-          <p className="section__eyebrow">{roadmap.eyebrow}</p>
-          <h2>{roadmap.title}</h2>
-        </div>
+    <section className="rmap reveal" id="roadmap" ref={ref}>
+      <div className="rmap__header">
+        <p className="rmap__eyebrow">{roadmap.eyebrow}</p>
+        <h2 className="rmap__title">{roadmap.title}</h2>
       </div>
 
-      <div className="roadmap__scroll">
-        <ul className="roadmap__track">
+      <div
+        className="rmap__scroll"
+        ref={scrollerRef}
+        onPointerDown={handlePointerDown}
+      >
+        <ul className="rmap__track">
           {roadmap.items.map((item) => (
-            <li key={item.title} className="card roadmap__card">
-              <span className="roadmap__date">{item.date}</span>
-              <h3>{item.title}</h3>
-              <p>{item.desc}</p>
+            <li key={item.title} className="rmap__item">
+              <div className="rmap__marker" aria-hidden="true">
+                <span className="rmap__dot-halo" />
+                <span className="rmap__dot-core" />
+              </div>
+              <span className="rmap__date">{item.date}</span>
+              <h3 className="rmap__name">{item.title}</h3>
+              <p className="rmap__desc">{item.desc}</p>
             </li>
           ))}
         </ul>

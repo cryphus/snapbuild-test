@@ -1,22 +1,33 @@
 import { security } from '../../data/siteContent'
+import { images } from '../../data/assets'
+import { useReveal } from '../../hooks/useReveal'
 import './Security.css'
 
 function Security() {
-  return (
-    <section className="security section" id="features">
-      <div className="container">
-        <div className="section__header section__header--center">
-          <h2>{security.title}</h2>
-        </div>
+  const ref = useReveal<HTMLElement>()
 
-        <div className="security__grid">
-          {security.cards.map((card) => (
-            <article key={card.title} className="card security__card">
-              <h3>{card.title}</h3>
-              <p>{card.desc}</p>
-            </article>
-          ))}
-        </div>
+  return (
+    <section className="safe reveal" id="features" ref={ref}>
+      <div className="safe__hero">
+        <h2 className="safe__title">
+          <span>Безопасность</span>
+          <span className="brand-text">без компромиссов</span>
+        </h2>
+        <p className="safe__subtitle">
+          Контроль над моделями, данными и инфраструктурой остаётся на вашей стороне
+        </p>
+      </div>
+
+      <div className="safe__points">
+        {security.cards.map((card, i) => (
+          <article key={card.title} className="safe__point">
+            <div className="safe__image">
+              <img src={images.security[i]} alt="" loading="lazy" />
+            </div>
+            <h3 className="safe__point-title">{card.title}</h3>
+            <p className="safe__point-desc">{card.desc}</p>
+          </article>
+        ))}
       </div>
     </section>
   )

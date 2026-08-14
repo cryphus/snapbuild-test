@@ -1,41 +1,42 @@
 import { compare } from '../../data/siteContent'
+import { useReveal } from '../../hooks/useReveal'
 import './Compare.css'
 
 function Compare() {
-  return (
-    <section className="compare section" id="compare">
-      <div className="container">
-        <div className="section__header section__header--center">
-          <h2>{compare.title}</h2>
-          <p className="section__lead">{compare.lead}</p>
-        </div>
+  const ref = useReveal<HTMLElement>()
 
-        <div className="compare__scroll">
-          <table className="compare__table">
-            <thead>
-              <tr>
-                <th scope="col">Особенности</th>
-                {compare.columns.map((col, i) => (
-                  <th scope="col" key={col} className={i === 0 ? 'compare__col-main' : undefined}>
-                    {col}
-                  </th>
+  return (
+    <section className="compare reveal" id="compare" ref={ref}>
+      <div className="compare__header">
+        <h2 className="compare__title">{compare.title}</h2>
+        <p className="compare__lead">{compare.lead}</p>
+      </div>
+
+      <div className="compare__scroll">
+        <table className="compare__table">
+          <thead>
+            <tr>
+              <th scope="col">Особенности</th>
+              {compare.columns.map((col, i) => (
+                <th scope="col" key={col} className={i === 0 ? 'compare__col-main' : undefined}>
+                  {i === 0 ? <span className="compare__brand">{col}</span> : col}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {compare.rows.map((row) => (
+              <tr key={row.feature}>
+                <th scope="row">{row.feature}</th>
+                {row.values.map((value, i) => (
+                  <td key={i} className={i === 0 ? 'compare__col-main' : undefined}>
+                    {value}
+                  </td>
                 ))}
               </tr>
-            </thead>
-            <tbody>
-              {compare.rows.map((row) => (
-                <tr key={row.feature}>
-                  <th scope="row">{row.feature}</th>
-                  {row.values.map((value, i) => (
-                    <td key={i} className={i === 0 ? 'compare__col-main' : undefined}>
-                      {value}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
     </section>
   )

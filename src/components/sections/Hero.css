@@ -1,17 +1,182 @@
+/*
+  Первый экран оригинала — крупная карточка с фирменным градиентом, внутри
+  заголовок, белая кнопка с градиентным текстом и скриншот продукта,
+  «въезжающий» снизу и упирающийся в нижний край карточки.
+*/
+.hero {
+  padding: calc(16 * var(--sp)) calc(16 * var(--sp)) calc(64 * var(--sp));
+  background: var(--color-bg);
+}
+
+.hero__card {
+  position: relative;
+  overflow: hidden;
+  border-radius: calc(32 * var(--sp));
+  background-color: #fff;
+  background-image: var(--brand-surface);
+}
+
 .hero__inner {
-  max-width: 860px;
-  margin-inline: auto;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(48 * var(--sp));
+  padding: calc(108 * var(--sp)) calc(40 * var(--sp)) 0;
+}
+
+.hero__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(24 * var(--sp));
+  animation: hero-copy-fade 1800ms var(--ease) 160ms both;
+}
+
+.hero__heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(16 * var(--sp));
+}
+
+.hero__title {
+  margin: 0;
+  max-width: calc(984 * var(--sp));
   text-align: center;
+  color: #000;
+  font-weight: 600;
+  font-size: calc(76 * var(--sp));
+  line-height: 1.08;
+  letter-spacing: -0.03em;
 }
 
 .hero__subtitle {
-  margin-top: 20px;
-  font-size: 1.125rem;
-  color: var(--color-neutral-500);
+  max-width: calc(760 * var(--sp));
+  text-align: center;
+  color: var(--color-text-tertiary);
+  font-weight: 500;
+  font-size: calc(18 * var(--sp));
+  line-height: 1.33;
 }
 
 .hero__cta {
-  margin-top: 32px;
-  padding: 14px 28px;
-  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 100px;
+  padding: calc(14 * var(--sp)) calc(22 * var(--sp));
+  font-weight: 600;
+  font-size: calc(14 * var(--sp));
+  line-height: 1.43;
+  animation: hero-copy-fade 1100ms var(--ease) 420ms both;
+  transition: transform 200ms var(--ease), box-shadow 200ms var(--ease);
+}
+
+.hero__cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.hero__media {
+  width: calc(1190 * var(--sp));
+  max-width: 100%;
+  margin-top: calc(20 * var(--sp));
+  animation: hero-media-enter 1100ms var(--ease) 220ms both;
+}
+
+.hero__shot {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2632 / 1386;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: var(--card-radius) var(--card-radius) 0 0;
+  position: relative;
+  bottom: calc(-8 * var(--sp));
+}
+
+@keyframes hero-copy-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes hero-media-enter {
+  from {
+    opacity: 0;
+    transform: translateY(46px) scale(0.975);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  .hero__card {
+    border-radius: calc(24 * var(--sp));
+  }
+
+  .hero__inner {
+    gap: calc(32 * var(--sp));
+    padding: calc(80 * var(--sp)) calc(24 * var(--sp)) 0;
+  }
+
+  .hero__intro {
+    gap: calc(20 * var(--sp));
+  }
+
+  .hero__heading {
+    gap: calc(12 * var(--sp));
+  }
+
+  .hero__title {
+    font-size: calc(56 * var(--sp));
+    line-height: 1.1;
+    max-width: none;
+  }
+
+  .hero__subtitle {
+    font-size: calc(18 * var(--sp));
+    max-width: calc(600 * var(--sp));
+  }
+
+  .hero__media {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    padding: calc(8 * var(--sp)) calc(8 * var(--sp)) calc(40 * var(--sp));
+  }
+
+  .hero__card {
+    border-radius: 16px;
+  }
+
+  .hero__inner {
+    gap: calc(28 * var(--sp));
+    padding: calc(76 * var(--sp)) calc(16 * var(--sp)) 0;
+  }
+
+  .hero__title {
+    font-size: calc(34 * var(--sp));
+    letter-spacing: -0.02em;
+  }
+
+  .hero__subtitle {
+    font-size: calc(14 * var(--sp));
+  }
+
+  .hero__cta {
+    font-size: calc(14 * var(--sp));
+    padding: calc(12 * var(--sp)) calc(20 * var(--sp));
+  }
 }

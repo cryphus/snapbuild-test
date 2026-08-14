@@ -1,3 +1,27 @@
+.compare {
+  padding: calc(96 * var(--sp)) var(--gutter);
+  scroll-margin-top: calc(90 * var(--sp));
+}
+
+.compare__header {
+  margin-bottom: calc(40 * var(--sp));
+}
+
+.compare__title {
+  margin: 0;
+  font-weight: 500;
+  font-size: calc(52 * var(--sp));
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.compare__lead {
+  margin-top: calc(16 * var(--sp));
+  max-width: calc(620 * var(--sp));
+  color: var(--color-text-secondary);
+  font-size: calc(16 * var(--sp));
+}
+
 .compare__scroll {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -7,12 +31,12 @@
   width: 100%;
   min-width: 720px;
   border-collapse: collapse;
-  font-size: 0.9375rem;
+  font-size: calc(15 * var(--sp));
 }
 
 .compare__table th,
 .compare__table td {
-  padding: 16px 20px;
+  padding: calc(16 * var(--sp)) calc(20 * var(--sp));
   text-align: left;
   border-bottom: 1px solid var(--color-divider);
   white-space: nowrap;
@@ -21,7 +45,7 @@
 .compare__table thead th {
   color: var(--color-text-muted);
   font-weight: 500;
-  font-size: 0.8125rem;
+  font-size: calc(13 * var(--sp));
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
@@ -32,12 +56,67 @@
 }
 
 .compare__table td {
-  color: var(--color-neutral-500);
+  color: var(--color-text-secondary);
 }
 
+/* Колонка снэпбилда выделена белой подложкой и градиентной рамкой сверху */
 .compare__col-main {
+  position: relative;
   color: var(--color-text) !important;
-  font-weight: 700 !important;
-  background: var(--card-bg);
+  font-weight: 600 !important;
+  background: var(--foreground-primary);
+}
+
+thead .compare__col-main {
   border-radius: 12px 12px 0 0;
+}
+
+thead .compare__col-main::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  border-radius: 12px 12px 0 0;
+  background: var(--brand-gradient-diag);
+}
+
+/* Название бренда в шапке колонки — залито градиентом */
+.compare__brand {
+  background: var(--brand-gradient-diag);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+  font-size: calc(15 * var(--sp));
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 1023px) {
+  .compare {
+    padding-block: calc(72 * var(--sp));
+  }
+
+  .compare__title {
+    font-size: calc(40 * var(--sp));
+  }
+}
+
+@media (max-width: 767px) {
+  .compare {
+    padding-block: calc(48 * var(--sp));
+  }
+
+  .compare__title {
+    font-size: calc(30 * var(--sp));
+  }
+
+  .compare__table {
+    font-size: 13px;
+  }
+
+  .compare__table th,
+  .compare__table td {
+    padding: 12px 14px;
+  }
 }

@@ -1,6 +1,7 @@
 /*
   Токены дизайн-системы, снятые с исходного лендинга snapbuild.ru
-  (computed styles + CSS custom properties сайта, см. PLAN.md, раздел 1.2).
+  (computed styles, CSS custom properties и исходные CSS-файлы сайта —
+  см. PLAN.md, раздел 1).
 
   Шрифт "TT Commons Pro" на исходном сайте платный и не распространяется
   публично — используем близкий по пропорциям геометрический гротеск
@@ -8,6 +9,24 @@
 */
 
 :root {
+  /* ------------------------------------------------------------------
+     Флюидная шкала.
+
+     Оригинал не использует фиксированные px: каждый размер записан как
+     calc(X / 14.4 * 1vw), где X — значение из макета 1440px, а 14.4 —
+     это 1440/100. На планшете и мобильных макеты другие (810 и 375),
+     поэтому меняется делитель.
+
+     Сводим это к одной переменной: --sp это ровно один «пиксель макета».
+     Любой размер пишется как calc(<значение из макета> * var(--sp)).
+
+     Проверка: при ширине 1280px --sp = 12.8/14.4 = 0.889px,
+     заголовок 76 * 0.889 = 67.5px — совпадает с оригиналом.
+  ------------------------------------------------------------------ */
+  --u: 1vw;
+  --ref: 14.4;
+  --sp: calc(var(--u) / var(--ref));
+
   /* Шрифт */
   --font-primary: 'Manrope', system-ui, sans-serif;
 
@@ -25,6 +44,10 @@
   --color-neutral-800: #1a1a1a;
   --color-neutral-900: #000000;
 
+  /* Поверхности */
+  --foreground-primary: #ffffff;
+  --foreground-tertiary: #f5f5f7;
+
   /* Текст */
   --color-text: #000000;
   --color-text-secondary: #5a5b62;
@@ -36,9 +59,37 @@
   /* Разделители / границы */
   --color-divider: rgba(0, 0, 0, 0.08);
   --color-border: var(--color-neutral-200);
+  --stroke-primary: rgba(0, 0, 0, 0.05);
+
+  /* ------------------------------------------------------------------
+     Фирменный градиент. Единственный цветовой акцент сайта: подложка
+     hero и финального CTA, текст кнопок на них, название «снэпбилд» в
+     таблице сравнения, точки роадмапа, акцент в заголовке безопасности.
+  ------------------------------------------------------------------ */
+  --brand-gradient: linear-gradient(90deg, #ff6d3c 0%, #ff6ba7 46%, #bb6dff 100%);
+  --brand-gradient-diag: linear-gradient(135deg, #ff6d3d 0%, #ff6ca7 52%, #bb6dff 100%);
+  --brand-surface: linear-gradient(
+    157deg,
+    #ffffff 17.71%,
+    #ffcdb3 43.16%,
+    #ffa4b6 58.2%,
+    #ffb2e9 73.32%,
+    #d4d6ff 90.8%,
+    #ffffff 103.16%
+  );
+  --brand-surface-cta: linear-gradient(
+    157deg,
+    #ffffff 11%,
+    #ffcdb3 33%,
+    #ffa4b6 53%,
+    #ffb2e9 67%,
+    #d4d6ff 90%,
+    #d4d6ff 97%,
+    #ffffff 100%
+  );
 
   /* Карточки */
-  --card-bg: #fdfdfd;
+  --card-bg: var(--foreground-primary);
   --card-border-color: var(--color-neutral-200);
   --card-border-width: 1px;
   --card-radius: 24px;
@@ -46,7 +97,7 @@
   /* Кнопки */
   --btn-radius: 12px;
   --btn-bg: var(--color-neutral-900);
-  --btn-bg-hover: var(--color-neutral-800);
+  --btn-bg-hover: #242424;
   --btn-color: #ffffff;
   --btn-outline-border: var(--color-neutral-300);
   --btn-outline-color: var(--color-neutral-900);
@@ -60,14 +111,13 @@
   /* Пилюли / чипы / табы */
   --pill-radius: 999px;
 
-  /* Сетка / контейнер */
-  --container-max-width: 1200px;
-  --container-padding: 24px;
-  --grid-gap: 28px;
+  /* Сетка / отступы: оригинал использует боковой отступ 40px в макете 1440 */
+  --gutter: calc(40 * var(--sp));
+  --grid-gap: calc(32 * var(--sp));
 
-  /* Тень (используется точечно — исходный сайт почти не использует тени) */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  /* Тени */
+  --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 6px 22px rgba(29, 22, 40, 0.055);
 
   /* Анимации */
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -75,7 +125,25 @@
   --transition-base: 0.3s var(--ease);
 }
 
-/* Брейкпоинты сайта (используются как ориентир в media-запросах компонентов):
-   mobile   ≤ 767px
-   tablet   768–1023px
-   desktop  ≥ 1024px */
+/* Планшет: макет 810px */
+@media (max-width: 1023px) {
+  :root {
+    --ref: 8.1;
+    --gutter: calc(20 * var(--sp));
+  }
+}
+
+/* Мобильные: макет 375px */
+@media (max-width: 767px) {
+  :root {
+    --ref: 3.75;
+    --gutter: calc(16 * var(--sp));
+  }
+}
+
+/* Выше 2560px оригинал замораживает масштаб — фиксируем единицу */
+@media (min-width: 2560px) {
+  :root {
+    --u: 25.6px;
+  }
+}
