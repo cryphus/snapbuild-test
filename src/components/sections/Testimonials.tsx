@@ -1,7 +1,10 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { testimonials } from '../../data/newSections'
 import { useReveal } from '../../hooks/useReveal'
 import './Testimonials.css'
+
+/** Через сколько отзыв сменяется сам */
+const AUTOPLAY_DELAY = 7000
 
 function Testimonials() {
   const ref = useReveal<HTMLElement>()
@@ -9,6 +12,7 @@ function Testimonials() {
   const [index, setIndex] = useState(0)
   // Направление нужно, чтобы отзыв въезжал с той стороны, куда листают
   const [direction, setDirection] = useState<'next' | 'prev'>('next')
+  const [paused, setPaused] = useState(false)
   const total = testimonials.items.length
   const current = testimonials.items[index]
 
@@ -21,6 +25,16 @@ function Testimonials() {
     setIndex(target)
   }
 
+  // Автосмена; пока курсор на карусели, отсчёт стоит
+  useEffect(() => {
+    if (paused) return
+    const timer = window.setTimeout(() => {
+      setDirection('next')
+      setIndex((i) => (i + 1) % total)
+    }, AUTOPLAY_DELAY)
+    return () => window.clearTimeout(timer)
+  }, [index, paused, total])
+
   return (
     <section className="testimonials section reveal" ref={ref} id="testimonials">
       <div className="container">
@@ -29,7 +43,13 @@ function Testimonials() {
           <h2>{testimonials.title}</h2>
         </div>
 
-        <div className="testimonials__carousel">
+        <div
+          className="testimonials__carousel"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onFocusCapture={() => setPaused(true)}
+          onBlurCapture={() => setPaused(false)}
+        >
           <button
             type="button"
             className="testimonials__arrow"
