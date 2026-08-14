@@ -41,9 +41,13 @@
   gap: calc(8 * var(--sp));
 }
 
+/* Кнопки без рамки, на светлой подложке; активная — сплошная чёрная */
 .tabs__tab {
-  border: 1px solid #141414;
-  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: var(--foreground-tertiary);
   border-radius: 12px;
   padding: calc(10 * var(--sp)) calc(11.25 * var(--sp));
   font-size: calc(16 * var(--sp));
@@ -53,7 +57,7 @@
 }
 
 .tabs__tab:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: var(--color-neutral-300);
 }
 
 .tabs__tab.is-active {
@@ -79,26 +83,19 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding: calc(20 * var(--sp)) 0;
+  padding: 0 0 calc(20 * var(--sp));
   background: none;
   border: 0;
   text-align: left;
   cursor: pointer;
 }
 
-.tabs__card:first-child {
-  padding-top: 0;
-}
-
-/* Тонкая полоса-индикатор слева от активного пункта */
+/* Индикатор — тонкая линия под пунктом, заливается фирменным градиентом */
 .tabs__card-progress {
   position: absolute;
-  left: calc(-16 * var(--sp));
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  border-radius: 2px;
-  background: rgba(0, 0, 0, 0.08);
+  inset: auto 0 -1px;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
@@ -106,31 +103,31 @@
   display: block;
   width: 100%;
   height: 100%;
-  background: var(--brand-gradient);
-  transform: scaleY(0);
-  transform-origin: top;
+  background: linear-gradient(90deg, #ffcdb3 0%, #ffa4b6 38%, #ffb2e9 68%, #d4d6ff 100%);
+  transform: scaleX(0);
+  transform-origin: 0% 50%;
   transition: transform 450ms var(--ease);
 }
 
 .tabs__card.is-active .tabs__card-progress-fill {
-  transform: scaleY(1);
+  transform: scaleX(1);
 }
 
 .tabs__card-title {
-  font-weight: 600;
+  font-weight: 500;
   font-size: calc(20 * var(--sp));
-  line-height: 1.3;
-  color: var(--color-text);
+  line-height: 1.4;
+  color: rgba(0, 0, 0, 0.4);
   transition: color 200ms ease;
 }
 
-.tabs__card-desc {
-  font-size: calc(15 * var(--sp));
-  line-height: 1.45;
-  color: var(--color-text-secondary);
+.tabs__card.is-active .tabs__card-title {
+  color: var(--color-text);
 }
 
-.tabs__card:not(.is-active) .tabs__card-title {
+.tabs__card-desc {
+  font-size: calc(14 * var(--sp));
+  line-height: 1.43;
   color: var(--color-text-secondary);
 }
 
@@ -176,10 +173,6 @@
   .tabs__panel {
     order: -1;
   }
-
-  .tabs__card-progress {
-    left: calc(-12 * var(--sp));
-  }
 }
 
 @media (max-width: 767px) {
@@ -197,7 +190,7 @@
   }
 
   .tabs__card {
-    padding-block: calc(14 * var(--sp));
+    padding-bottom: calc(14 * var(--sp));
   }
 
   .tabs__card-title {
@@ -205,10 +198,6 @@
   }
 
   .tabs__card-desc {
-    font-size: calc(14 * var(--sp));
-  }
-
-  .tabs__card-progress {
-    left: calc(-10 * var(--sp));
+    font-size: calc(13 * var(--sp));
   }
 }

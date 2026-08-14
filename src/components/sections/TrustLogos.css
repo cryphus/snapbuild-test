@@ -1,12 +1,12 @@
 /*
-  Полоса логотипов. На десктопе — статичный ряд с поочерёдным появлением,
-  на мобильных оригинал превращает её в бесконечную бегущую строку.
+  Полоса логотипов. На десктопе — статичный ряд по центру с поочерёдным
+  появлением, на мобильных оригинал превращает её в бесконечную ленту.
 */
 .trust {
   display: flex;
   flex-direction: column;
   gap: calc(24 * var(--sp));
-  margin-top: calc(32 * var(--sp));
+  margin-top: 32px;
   overflow: hidden;
 }
 
@@ -17,6 +17,7 @@
   color: var(--color-text-tertiary);
   font-size: calc(16 * var(--sp));
   line-height: 1.5;
+  letter-spacing: -0.03em;
 }
 
 .trust__track {
@@ -25,6 +26,7 @@
   justify-content: center;
   gap: calc(107 * var(--sp));
   padding-inline: var(--gutter);
+  overflow-x: hidden;
 }
 
 .trust__group {
@@ -33,7 +35,7 @@
 
 .trust__item {
   flex: 0 0 auto;
-  height: calc(22.5 * var(--sp));
+  height: calc(22 * var(--sp));
 }
 
 .trust__item img {
@@ -49,14 +51,19 @@
 }
 
 /*
-  Логотипы выходят по очереди, как в оригинале. Анимация запускается по
-  таймеру при загрузке, а не по попаданию в вьюпорт: гарантированно
-  доигрывает и не может оставить полосу пустой.
+  Логотипы проявляются по очереди, когда полоса доходит до экрана.
+  Скрытое состояние включается только после пробы (класс js-reveal),
+  поэтому без работающих переходов логотипы просто видны сразу.
 */
 @media (min-width: 768px) {
-  .trust__item {
+  .js-reveal .trust__item {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  .js-reveal .trust.is-visible .trust__item {
     animation: logo-reveal 520ms var(--ease) both;
-    animation-delay: calc(300ms + var(--logo-index, 0) * 90ms);
+    animation-delay: calc(var(--logo-index, 0) * 90ms);
   }
 }
 
@@ -89,6 +96,7 @@
   .trust__eyebrow {
     font-size: calc(14 * var(--sp));
     line-height: 1.43;
+    letter-spacing: 0;
   }
 
   .trust__track {
@@ -96,25 +104,20 @@
     padding: 0;
     width: max-content;
     justify-content: flex-start;
+    overflow-x: visible;
     animation: marquee-scroll 28s linear infinite;
   }
 
-  .trust__group {
+  .trust__group,
+  .trust__group[aria-hidden='true'] {
     display: flex;
     align-items: center;
     flex: 0 0 auto;
   }
 
-  .trust__group[aria-hidden='true'] {
-    display: flex;
-  }
-
   .trust__item {
     height: calc(28 * var(--sp));
     margin-inline: calc(20 * var(--sp));
-    opacity: 1;
-    transform: none;
-    animation: none;
   }
 
   .trust__track:hover {
@@ -132,7 +135,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .trust__item {
+  .js-reveal .trust__item {
     opacity: 1;
     transform: none;
     animation: none;

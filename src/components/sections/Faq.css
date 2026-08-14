@@ -1,39 +1,46 @@
 .faq {
-  padding: calc(96 * var(--sp)) var(--gutter);
+  padding: calc(32 * var(--sp)) var(--gutter) calc(96 * var(--sp));
   display: flex;
   flex-direction: column;
-  gap: calc(24 * var(--sp));
+  gap: 24px;
   scroll-margin-top: calc(90 * var(--sp));
-}
-
-.faq__header {
-  text-align: center;
-  max-width: calc(760 * var(--sp));
-  margin-inline: auto;
 }
 
 .faq__title {
   margin: 0;
   font-weight: 500;
   font-size: calc(52 * var(--sp));
-  line-height: 1.15;
+  line-height: 1.23;
   letter-spacing: -0.02em;
 }
 
 .faq__lead {
-  margin-top: calc(16 * var(--sp));
+  margin-top: calc(12 * var(--sp));
+  max-width: calc(760 * var(--sp));
   color: var(--color-text-secondary);
   font-size: calc(16 * var(--sp));
 }
 
+/* Две колонки вопросов, как в оригинале */
 .faq__list {
-  width: 100%;
-  max-width: calc(900 * var(--sp));
-  margin-inline: auto;
+  display: flex;
+  gap: calc(32 * var(--sp));
+  align-items: flex-start;
 }
 
+.faq__col {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: calc(20 * var(--sp));
+}
+
+/* Каждый вопрос — отдельная карточка на светлой подложке */
 .faq__item {
-  border-bottom: 1px solid var(--color-neutral-200);
+  background: #fafafa;
+  border-radius: 20px;
+  padding: calc(20 * var(--sp));
 }
 
 .faq__trigger {
@@ -41,40 +48,38 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: calc(16 * var(--sp));
+  gap: calc(20 * var(--sp));
   background: none;
   border: none;
-  padding: calc(20 * var(--sp)) 0;
+  padding: 0;
   text-align: left;
   font-size: calc(18 * var(--sp));
   font-weight: 400;
   line-height: 1.375;
+  color: var(--color-neutral-500);
+  transition: color 200ms ease;
+}
+
+.faq__trigger:hover,
+.faq__item.is-open .faq__trigger {
   color: var(--color-text);
-}
-
-.faq__trigger:hover .faq__question {
-  opacity: 0.7;
-}
-
-.faq__question {
-  transition: opacity 200ms ease;
 }
 
 /* Иконка «плюс», разворачивающаяся в «минус» */
 .faq__icon {
   position: relative;
   flex-shrink: 0;
-  width: calc(24 * var(--sp));
-  height: calc(24 * var(--sp));
+  width: 24px;
+  height: 24px;
 }
 
 .faq__icon span {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: calc(14 * var(--sp));
+  width: 14px;
   height: 1.5px;
-  background: var(--color-text-secondary);
+  background: currentColor;
   border-radius: 2px;
   transform: translate(-50%, -50%);
   transition: transform 300ms var(--ease), opacity 200ms ease;
@@ -95,11 +100,10 @@
 }
 
 .faq__answer {
-  padding-bottom: calc(20 * var(--sp));
-  max-width: calc(760 * var(--sp));
+  padding-top: calc(12 * var(--sp));
   color: var(--color-text-secondary);
   font-size: calc(16 * var(--sp));
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 @keyframes faq-open {
@@ -115,26 +119,36 @@
 
 @media (max-width: 1023px) {
   .faq {
-    padding-block: calc(72 * var(--sp));
+    padding-block: calc(24 * var(--sp)) calc(72 * var(--sp));
   }
 
   .faq__title {
     font-size: calc(40 * var(--sp));
   }
+
+  /* На узких экранах колонки складываются в одну */
+  .faq__list {
+    flex-direction: column;
+    gap: calc(20 * var(--sp));
+  }
 }
 
 @media (max-width: 767px) {
   .faq {
-    padding-block: calc(48 * var(--sp));
+    padding-block: calc(16 * var(--sp)) calc(48 * var(--sp));
   }
 
   .faq__title {
-    font-size: calc(28 * var(--sp));
+    font-size: calc(30 * var(--sp));
+  }
+
+  .faq__item {
+    border-radius: 16px;
+    padding: calc(16 * var(--sp));
   }
 
   .faq__trigger {
-    font-size: calc(16 * var(--sp));
-    padding-block: calc(16 * var(--sp));
+    font-size: calc(15 * var(--sp));
   }
 
   .faq__answer {

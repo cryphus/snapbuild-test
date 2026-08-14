@@ -1,8 +1,11 @@
 import { trust } from '../../data/siteContent'
 import { images } from '../../data/assets'
+import { useReveal } from '../../hooks/useReveal'
 import './TrustLogos.css'
 
 function TrustLogos() {
+  const ref = useReveal<HTMLElement>()
+
   // На мобильных лента едет бесконечно, поэтому список дублируется
   const marqueeGroup = (ariaHidden: boolean) => (
     <div className="trust__group" aria-hidden={ariaHidden || undefined}>
@@ -19,7 +22,7 @@ function TrustLogos() {
   )
 
   return (
-    <section className="trust" id="logos">
+    <section className="trust" id="logos" ref={ref}>
       <p className="trust__eyebrow">{trust.text}</p>
       <div className="trust__track">
         {marqueeGroup(false)}

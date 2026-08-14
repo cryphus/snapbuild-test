@@ -13,7 +13,11 @@ function Compare() {
       </div>
 
       <div className="compare__scroll">
-        <table className="compare__table">
+        <div className="compare__grid">
+          {/* Градиентная обводка вокруг колонки снэпбилда */}
+          <span className="compare__ring" aria-hidden="true" />
+
+          <table className="compare__table">
           <thead>
             <tr>
               <th scope="col">Особенности</th>
@@ -36,7 +40,8 @@ function Compare() {
               </tr>
             ))}
           </tbody>
-        </table>
+          </table>
+        </div>
       </div>
     </section>
   )
