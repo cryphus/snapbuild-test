@@ -8,6 +8,9 @@ export const asset = (name: string) => `${base}assets/images/${name}`
 /** 3D-рендеры кейсов — кладутся в public/assets/renders */
 export const renderAsset = (name: string) => `${base}assets/renders/${name}`
 
+/** Монохромные логотипы интеграций — public/assets/logos */
+export const logoAsset = (name: string) => `${base}assets/logos/${name}`
+
 export const images = {
   logo: asset('582db07d8ccd60da.svg'),
   heroShot: asset('hero-snapbuild-2026-08-07-v2.webp'),

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { integrations } from '../../data/newSections'
+import { logoAsset } from '../../data/assets'
 import { useReveal } from '../../hooks/useReveal'
 import './Integrations.css'
 
@@ -41,7 +42,13 @@ function Integrations() {
         {shown.map((item) => (
           <article className="integr__card" key={item.name}>
             <div className="integr__card-top">
-              <div className="integr__mono">{item.mono}</div>
+              <span className="integr__logo">
+                {item.logo ? (
+                  <img src={logoAsset(item.logo)} alt="" loading="lazy" />
+                ) : (
+                  <span className="integr__mono">{item.mono}</span>
+                )}
+              </span>
               <span className="integr__category">{item.category}</span>
             </div>
             <h3 className="integr__name">{item.name}</h3>

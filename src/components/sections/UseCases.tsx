@@ -11,8 +11,6 @@ function UseCases() {
   const [missingRenders, setMissingRenders] = useState<string[]>([])
 
   const active = useCases.items[index]
-  const total = String(useCases.items.length).padStart(2, '0')
-  const current = String(index + 1).padStart(2, '0')
   const hasRender = !missingRenders.includes(active.render)
 
   return (
@@ -45,17 +43,8 @@ function UseCases() {
           })}
         </div>
 
+        {/* В превью только рендер — без плашек и подписей */}
         <div className="cases__preview" style={{ background: active.gradient }}>
-          <div className="cases__preview-top">
-            <span className="cases__badge">
-              <span className="cases__badge-mark" style={{ background: active.accent }} />
-              {active.role}
-            </span>
-            <span className="cases__counter">
-              {current} / {total}
-            </span>
-          </div>
-
           <div className={`cases__canvas${hasRender ? ' has-render' : ''}`} key={index}>
             {hasRender && (
               <img
@@ -70,7 +59,6 @@ function UseCases() {
                 }
               />
             )}
-            <span className="cases__caption">{active.caption}</span>
           </div>
         </div>
       </div>

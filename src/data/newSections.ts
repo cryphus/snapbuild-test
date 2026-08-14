@@ -132,16 +132,18 @@ export const integrations = {
     linkText: 'обсудим на демо',
     href: '#contact',
   },
+  // logo — файл в public/assets/logos; где официального монохромного SVG
+  // в открытых наборах нет, показывается буквенная метка из mono
   items: [
-    { name: 'Figma', mono: 'Fg', category: 'Дизайн', desc: 'Импорт компонентов и токенов дизайн-системы' },
-    { name: 'Miro', mono: 'Mi', category: 'Дизайн', desc: 'Сбор структуры страницы прямо с доски кампании' },
-    { name: 'GitHub', mono: 'Gh', category: 'Разработка', desc: 'Выгрузка готовых страниц в репозиторий пул-реквестом' },
-    { name: 'GitLab', mono: 'Gl', category: 'Разработка', desc: 'Сборка и публикация через ваш CI в приватном контуре' },
-    { name: 'Slack', mono: 'Sl', category: 'Коммуникации', desc: 'Согласование материалов и уведомления о готовности' },
-    { name: 'Telegram', mono: 'Tg', category: 'Коммуникации', desc: 'Запуск генерации и приём готовых файлов в боте' },
-    { name: 'Bitrix24', mono: 'B24', category: 'CRM', desc: 'Презентации и КП по данным сделки в один клик' },
-    { name: 'amoCRM', mono: 'am', category: 'CRM', desc: 'Персональные лендинги под сегменты воронки' },
-  ],
+    { name: 'Figma', mono: 'Fg', logo: 'figma.svg', category: 'Дизайн', desc: 'Импорт компонентов и токенов дизайн-системы' },
+    { name: 'Miro', mono: 'Mi', logo: 'miro.svg', category: 'Дизайн', desc: 'Сбор структуры страницы прямо с доски кампании' },
+    { name: 'GitHub', mono: 'Gh', logo: 'github.svg', category: 'Разработка', desc: 'Выгрузка готовых страниц в репозиторий пул-реквестом' },
+    { name: 'GitLab', mono: 'Gl', logo: 'gitlab.svg', category: 'Разработка', desc: 'Сборка и публикация через ваш CI в приватном контуре' },
+    { name: 'Slack', mono: 'Sl', logo: 'slack.svg', category: 'Коммуникации', desc: 'Согласование материалов и уведомления о готовности' },
+    { name: 'Telegram', mono: 'Tg', logo: 'telegram.svg', category: 'Коммуникации', desc: 'Запуск генерации и приём готовых файлов в боте' },
+    { name: 'Bitrix24', mono: 'B24', logo: null, category: 'CRM', desc: 'Презентации и КП по данным сделки в один клик' },
+    { name: 'amoCRM', mono: 'amo', logo: null, category: 'CRM', desc: 'Персональные лендинги под сегменты воронки' },
+  ] as { name: string; mono: string; logo: string | null; category: string; desc: string }[],
 }
 
 export const testimonials = {

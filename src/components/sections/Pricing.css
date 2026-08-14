@@ -73,14 +73,15 @@
   align-items: stretch;
 }
 
+/* Рамка в 2px есть у всех карточек — у выделенной она градиентная,
+   у остальных прозрачная, иначе средняя съезжает на её толщину */
 .plans__item {
   display: flex;
+  padding: 2px;
+  border-radius: 22px;
 }
 
-/* Градиентная рамка выделенного тарифа */
 .plans__item--highlighted {
-  border-radius: 22px;
-  padding: 2px;
   background: linear-gradient(135deg, #ff8a5c, #ff5c8a 55%, #c58cff);
 }
 
@@ -93,11 +94,13 @@
   width: 100%;
 }
 
+/* Высота шапки задана, иначе метка у среднего тарифа сдвигает всё ниже */
 .plans__card-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: calc(12 * var(--sp));
+  min-height: calc(32 * var(--sp));
   margin-bottom: calc(8 * var(--sp));
 }
 
@@ -160,7 +163,10 @@
   }
 }
 
+/* Растягивается на свободную высоту, поэтому кнопки во всех
+   карточках оказываются на одном уровне */
 .plans__features {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: calc(12 * var(--sp));
@@ -170,8 +176,7 @@
 }
 
 .plans__cta {
-  margin-top: auto;
-  padding-top: 0;
+  margin-top: calc(32 * var(--sp));
   border: 1px solid #e2e2e2;
   background: #fff;
   color: #0a0a0a;
@@ -181,11 +186,6 @@
   font-weight: 600;
   cursor: pointer;
   transition: border-color 0.25s ease, background-color 0.25s ease;
-}
-
-/* Кнопки прижаты к низу карточки, чтобы ряд выглядел ровным */
-.plans__features + .plans__cta {
-  margin-top: calc(32 * var(--sp));
 }
 
 .plans__cta:hover {
