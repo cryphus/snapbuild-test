@@ -1,92 +1,90 @@
 import { useEffect, useRef } from 'react'
 
 /**
- * Плавное появление блока при попадании в вьюпорт — как в оригинале
+ * Плавное появление блока при прокрутке — как в оригинале
  * (сдвиг снизу 32px, 0.9s, cubic-bezier(0.16, 1, 0.3, 1)).
  *
- * Эффект требует держать секцию скрытой до срабатывания, поэтому включаем
- * его только там, где он гарантированно доиграет. Перед этим проверяем две
- * вещи, каждая из которых уже ломалась на практике:
+ * Появление считается по положению блока, а не через IntersectionObserver.
+ * Observer пропускает секции при «прыжке» прокрутки: переход по якорю из
+ * меню перематывает страницу мимо нескольких блоков, состояние
+ * пересечения между кадрами не меняется, колбэк не приходит — и секция
+ * остаётся скрытой, хотя пользователь её уже проскроллил. Проверка
+ * положения такого пробела не имеет: всё, что выше границы, показывается.
  *
- *  1. IntersectionObserver действительно присылает колбэки — иначе секция
- *     никогда не получит команду появиться;
- *  2. браузер действительно продвигает переходы — встречаются окружения
- *     (встроенные webview без композитинга), где transition стартует, но
- *     навсегда застывает на начальном значении, то есть на opacity 0.
- *
- * Не прошла любая из проверок — класс js-reveal не ставится, и страница
- * показывается целиком без анимации. Контент не может остаться невидимым.
+ * Скрытое состояние включается только после пробы: в некоторых окружениях
+ * (встроенные webview без композитинга) переход стартует, но навсегда
+ * застывает на начальном значении, то есть на opacity 0. Не прошла проба —
+ * класс js-reveal не ставится и страница видна целиком без анимации.
  */
-const PROBE_TIMEOUT = 400
 
-type Listener = (ok: boolean) => void
+/** Доля высоты экрана, ниже которой блок считается показанным. */
+const TRIGGER_RATIO = 0.9
 
-let probeState: 'pending' | 'ok' | 'failed' = 'pending'
-let probeStarted = false
-const waiting: Listener[] = []
+const pending = new Set<HTMLElement>()
+let listening = false
+let frame = 0
 
-function settle(ok: boolean) {
-  if (probeState !== 'pending') return
-  probeState = ok ? 'ok' : 'failed'
-  if (ok) document.documentElement.classList.add('js-reveal')
-  waiting.splice(0).forEach((fn) => fn(ok))
+function reveal(el: HTMLElement) {
+  el.classList.add('is-visible')
+  pending.delete(el)
 }
 
-/** Присылает ли IntersectionObserver колбэки. */
-function probeObserver(): Promise<boolean> {
-  return new Promise((resolve) => {
-    if (!('IntersectionObserver' in window)) {
-      resolve(false)
-      return
-    }
-
-    const el = document.createElement('div')
-    el.style.cssText =
-      'position:fixed;top:50%;left:0;width:1px;height:1px;pointer-events:none;opacity:0'
-    document.body.appendChild(el)
-
-    const finish = (ok: boolean) => {
-      window.clearTimeout(timer)
-      observer.disconnect()
-      el.remove()
-      resolve(ok)
-    }
-
-    const timer = window.setTimeout(() => finish(false), PROBE_TIMEOUT)
-    const observer = new IntersectionObserver(() => finish(true))
-    observer.observe(el)
+function sweep() {
+  frame = 0
+  const limit = window.innerHeight * TRIGGER_RATIO
+  pending.forEach((el) => {
+    if (el.getBoundingClientRect().top < limit) reveal(el)
   })
+  if (!pending.size) stopListening()
+}
+
+function onScroll() {
+  if (frame) return
+  frame = requestAnimationFrame(sweep)
+}
+
+function startListening() {
+  if (listening) return
+  listening = true
+  window.addEventListener('scroll', onScroll, { passive: true })
+  window.addEventListener('resize', onScroll)
+}
+
+function stopListening() {
+  if (!listening) return
+  listening = false
+  window.removeEventListener('scroll', onScroll)
+  window.removeEventListener('resize', onScroll)
 }
 
 /** Продвигает ли браузер переходы, а не застывает на начальном значении. */
-function probeTransition(): Promise<boolean> {
-  return new Promise((resolve) => {
-    const el = document.createElement('div')
-    el.style.cssText =
-      'position:fixed;top:0;left:0;width:1px;height:1px;pointer-events:none;opacity:0;transition:opacity 300ms linear'
-    document.body.appendChild(el)
-
-    // читаем стиль, чтобы браузер зафиксировал начальное значение
-    void getComputedStyle(el).opacity
-    el.style.opacity = '1'
-
-    window.setTimeout(() => {
-      const moved = parseFloat(getComputedStyle(el).opacity) > 0
-      el.remove()
-      resolve(moved)
-    }, 120)
-  })
-}
+let probeState: 'pending' | 'ok' | 'failed' = 'pending'
+let probeStarted = false
+const waiting: ((ok: boolean) => void)[] = []
 
 function probe() {
   if (probeStarted) return
   probeStarted = true
-  Promise.all([probeObserver(), probeTransition()])
-    .then(([observerOk, transitionOk]) => settle(observerOk && transitionOk))
-    .catch(() => settle(false))
+
+  const el = document.createElement('div')
+  el.style.cssText =
+    'position:fixed;top:0;left:0;width:1px;height:1px;pointer-events:none;opacity:0;transition:opacity 300ms linear'
+  document.body.appendChild(el)
+
+  // читаем стиль, чтобы браузер зафиксировал начальное значение
+  void getComputedStyle(el).opacity
+  el.style.opacity = '1'
+
+  window.setTimeout(() => {
+    const ok = parseFloat(getComputedStyle(el).opacity) > 0
+    el.remove()
+    probeState = ok ? 'ok' : 'failed'
+    if (ok) document.documentElement.classList.add('js-reveal')
+    waiting.splice(0).forEach((fn) => fn(ok))
+  }, 120)
 }
 
-function onProbeReady(fn: Listener) {
+function onProbeReady(fn: (ok: boolean) => void) {
   if (probeState === 'pending') {
     waiting.push(fn)
     probe()
@@ -102,7 +100,6 @@ export function useReveal<T extends HTMLElement = HTMLElement>() {
     const el = ref.current
     if (!el) return
 
-    let observer: IntersectionObserver | null = null
     let cancelled = false
 
     onProbeReady((ok) => {
@@ -111,23 +108,15 @@ export function useReveal<T extends HTMLElement = HTMLElement>() {
         el.classList.add('is-visible')
         return
       }
-
-      observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return
-            entry.target.classList.add('is-visible')
-            observer?.unobserve(entry.target)
-          })
-        },
-        { threshold: 0.15, rootMargin: '0px 0px -40px 0px' },
-      )
-      observer.observe(el)
+      pending.add(el)
+      startListening()
+      sweep()
     })
 
     return () => {
       cancelled = true
-      observer?.disconnect()
+      pending.delete(el)
+      if (!pending.size) stopListening()
     }
   }, [])
 
