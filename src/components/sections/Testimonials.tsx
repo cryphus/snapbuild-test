@@ -7,11 +7,18 @@ function Testimonials() {
   const ref = useReveal<HTMLElement>()
 
   const [index, setIndex] = useState(0)
+  // Направление нужно, чтобы отзыв въезжал с той стороны, куда листают
+  const [direction, setDirection] = useState<'next' | 'prev'>('next')
   const total = testimonials.items.length
   const current = testimonials.items[index]
 
   const goTo = (next: number) => {
-    setIndex(((next % total) + total) % total)
+    const target = ((next % total) + total) % total
+    if (target === index) return
+    // при перелистывании через край считаем направление по самому шагу
+    const forward = next > index
+    setDirection(forward ? 'next' : 'prev')
+    setIndex(target)
   }
 
   return (
@@ -32,7 +39,7 @@ function Testimonials() {
             ‹
           </button>
 
-          <article className="card testimonials__card">
+          <article className={`card testimonials__card is-${direction}`} key={index}>
             <p className="testimonials__quote">«{current.quote}»</p>
             <div className="testimonials__author">
               <div>

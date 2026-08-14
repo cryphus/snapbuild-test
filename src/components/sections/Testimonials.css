@@ -28,8 +28,50 @@
 
 .testimonials__card {
   flex-grow: 1;
+  min-width: 0;
   padding: 32px;
   min-height: 220px;
+}
+
+/*
+  Отзыв въезжает с той стороны, куда листают: вперёд — справа,
+  назад — слева. Кривая и длительность взяты у слайдов оригинала.
+*/
+.testimonials__card.is-next {
+  animation: testimonial-in-next 0.45s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+.testimonials__card.is-prev {
+  animation: testimonial-in-prev 0.45s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+@keyframes testimonial-in-next {
+  from {
+    opacity: 0;
+    transform: translateX(24%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes testimonial-in-prev {
+  from {
+    opacity: 0;
+    transform: translateX(-24%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonials__card.is-next,
+  .testimonials__card.is-prev {
+    animation: none;
+  }
 }
 
 .testimonials__quote {

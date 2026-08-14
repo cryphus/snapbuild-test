@@ -38,9 +38,14 @@ function Integrations() {
         ))}
       </div>
 
-      <div className="integr__grid">
-        {shown.map((item) => (
-          <article className="integr__card" key={item.name}>
+      {/* key по категории пересобирает сетку, поэтому карточки въезжают заново */}
+      <div className="integr__grid" key={category}>
+        {shown.map((item, i) => (
+          <article
+            className="integr__card"
+            key={item.name}
+            style={{ animationDelay: `${i * 45}ms` }}
+          >
             <div className="integr__card-top">
               <span className="integr__logo">
                 {item.logo ? (
