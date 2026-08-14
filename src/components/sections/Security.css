@@ -1,49 +1,17 @@
 .safe {
-  padding: calc(32 * var(--sp)) var(--gutter);
+  padding: calc(32 * var(--sp)) var(--gutter) calc(96 * var(--sp));
   display: flex;
   flex-direction: column;
   gap: calc(32 * var(--sp));
   scroll-margin-top: calc(90 * var(--sp));
 }
 
-.safe__hero {
-  width: 100%;
-  aspect-ratio: 1360 / 400;
-  border-radius: var(--card-radius);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: calc(12 * var(--sp));
-  padding: calc(64 * var(--sp));
-  background: var(--foreground-primary);
-}
-
 .safe__title {
   margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  column-gap: calc(10 * var(--sp));
-  text-align: center;
-  font-weight: 600;
-  font-size: calc(48 * var(--sp));
-  line-height: 1.33;
-  letter-spacing: -0.02em;
-}
-
-/* Акцентная часть заголовка залита фирменным градиентом — как в оригинале */
-.safe__title .brand-text {
-  background-image: var(--brand-gradient-diag);
-}
-
-.safe__subtitle {
-  text-align: center;
-  color: var(--color-text);
   font-weight: 500;
-  font-size: calc(16 * var(--sp));
-  line-height: 1.5;
+  font-size: calc(52 * var(--sp));
+  line-height: 1.23;
+  letter-spacing: -0.02em;
 }
 
 .safe__points {
@@ -55,13 +23,13 @@
 .safe__point {
   display: flex;
   flex-direction: column;
-  gap: calc(12 * var(--sp));
+  gap: calc(20 * var(--sp));
 }
 
 .safe__image {
   display: block;
   width: 100%;
-  height: calc(432 * var(--sp));
+  aspect-ratio: 379 / 384;
   border-radius: 20px;
   overflow: hidden;
 }
@@ -71,6 +39,12 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+}
+
+.safe__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .safe__point-title {
@@ -88,13 +62,12 @@
 }
 
 @media (max-width: 1023px) {
-  .safe__hero {
-    aspect-ratio: auto;
-    padding: calc(48 * var(--sp)) calc(24 * var(--sp));
+  .safe {
+    padding-block: calc(24 * var(--sp)) calc(72 * var(--sp));
   }
 
   .safe__title {
-    font-size: calc(36 * var(--sp));
+    font-size: calc(40 * var(--sp));
   }
 
   .safe__points {
@@ -103,29 +76,21 @@
   }
 
   .safe__image {
-    height: auto;
     aspect-ratio: 1 / 1;
   }
 }
 
 @media (max-width: 767px) {
-  .safe__hero {
-    padding: calc(32 * var(--sp)) calc(16 * var(--sp));
-    border-radius: 16px;
+  .safe {
+    padding-block: calc(16 * var(--sp)) calc(48 * var(--sp));
   }
 
   .safe__title {
-    font-size: calc(26 * var(--sp));
-    column-gap: calc(6 * var(--sp));
-  }
-
-  .safe__subtitle {
-    font-size: calc(14 * var(--sp));
+    font-size: calc(30 * var(--sp));
   }
 
   .safe__image {
-    height: calc(171.5 * var(--sp));
-    aspect-ratio: auto;
+    aspect-ratio: 375 / 171.5;
     border-radius: 6px;
   }
 

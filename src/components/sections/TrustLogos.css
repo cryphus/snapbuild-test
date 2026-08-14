@@ -33,7 +33,7 @@
 
 .trust__item {
   flex: 0 0 auto;
-  height: calc(37 * var(--sp));
+  height: calc(22.5 * var(--sp));
 }
 
 .trust__item img {
@@ -77,7 +77,7 @@
   }
 
   .trust__item {
-    height: calc(37 * var(--sp));
+    height: calc(26 * var(--sp));
   }
 }
 

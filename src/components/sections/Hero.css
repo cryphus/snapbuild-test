@@ -3,15 +3,16 @@
   заголовок, белая кнопка с градиентным текстом и скриншот продукта,
   «въезжающий» снизу и упирающийся в нижний край карточки.
 */
+/* Отступ и радиус карточки у оригинала фиксированные, не флюидные */
 .hero {
-  padding: calc(16 * var(--sp)) calc(16 * var(--sp)) calc(64 * var(--sp));
+  padding: 12px;
   background: var(--color-bg);
 }
 
 .hero__card {
   position: relative;
   overflow: hidden;
-  border-radius: calc(32 * var(--sp));
+  border-radius: 20px;
   background-color: #fff;
   background-image: var(--brand-surface);
 }
@@ -53,7 +54,7 @@
 }
 
 .hero__subtitle {
-  max-width: calc(760 * var(--sp));
+  max-width: calc(984 * var(--sp));
   text-align: center;
   color: var(--color-text-tertiary);
   font-weight: 500;
@@ -66,7 +67,7 @@
   align-items: center;
   justify-content: center;
   background: #fff;
-  border-radius: 100px;
+  border-radius: 12px;
   padding: calc(14 * var(--sp)) calc(22 * var(--sp));
   font-weight: 600;
   font-size: calc(14 * var(--sp));
@@ -80,9 +81,9 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
+/* Скриншот занимает всю ширину внутреннего блока, как в оригинале */
 .hero__media {
-  width: calc(1190 * var(--sp));
-  max-width: 100%;
+  width: 100%;
   margin-top: calc(20 * var(--sp));
   animation: hero-media-enter 1100ms var(--ease) 220ms both;
 }
@@ -120,7 +121,7 @@
 
 @media (max-width: 1023px) {
   .hero__card {
-    border-radius: calc(24 * var(--sp));
+    border-radius: 20px;
   }
 
   .hero__inner {
@@ -154,7 +155,7 @@
 
 @media (max-width: 767px) {
   .hero {
-    padding: calc(8 * var(--sp)) calc(8 * var(--sp)) calc(40 * var(--sp));
+    padding: 8px;
   }
 
   .hero__card {

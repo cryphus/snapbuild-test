@@ -1,9 +1,12 @@
 import { useCases } from '../../data/newSections'
+import { useReveal } from '../../hooks/useReveal'
 import './UseCases.css'
 
 function UseCases() {
+  const ref = useReveal<HTMLElement>()
+
   return (
-    <section className="use-cases section" id="scenarios">
+    <section className="use-cases section reveal" ref={ref} id="scenarios">
       <div className="container">
         <div className="section__header">
           <p className="section__eyebrow">{useCases.eyebrow}</p>

@@ -1,5 +1,5 @@
 .steps {
-  padding: calc(96 * var(--sp)) var(--gutter);
+  padding: calc(32 * var(--sp)) var(--gutter) calc(128 * var(--sp));
   display: flex;
   flex-direction: column;
   gap: calc(40 * var(--sp));
@@ -42,7 +42,7 @@
 .steps__media {
   display: block;
   width: 100%;
-  height: calc(432 * var(--sp));
+  aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: 20px;
   background: var(--foreground-primary);
@@ -91,10 +91,6 @@
   .steps__grid {
     grid-template-columns: 1fr;
     gap: calc(24 * var(--sp));
-  }
-
-  .steps__media {
-    height: calc(320 * var(--sp));
   }
 }
 

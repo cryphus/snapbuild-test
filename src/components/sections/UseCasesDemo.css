@@ -18,12 +18,20 @@
   gap: calc(32 * var(--sp));
 }
 
+/* Оригинал держит заголовок в одну строку и ужимает кегль под ширину */
 .tabs__title {
   margin: 0;
   font-weight: 500;
   font-size: calc(52 * var(--sp));
   line-height: 1.1;
   letter-spacing: -0.02em;
+}
+
+@media (min-width: 1024px) {
+  .tabs__title {
+    white-space: nowrap;
+    font-size: clamp(34px, 3.2vw, 46px);
+  }
 }
 
 .tabs__group {
@@ -36,9 +44,9 @@
 .tabs__tab {
   border: 1px solid #141414;
   background: transparent;
-  border-radius: var(--pill-radius);
-  padding: calc(10 * var(--sp)) calc(20 * var(--sp));
-  font-size: calc(14 * var(--sp));
+  border-radius: 12px;
+  padding: calc(10 * var(--sp)) calc(11.25 * var(--sp));
+  font-size: calc(16 * var(--sp));
   font-weight: 500;
   color: var(--color-text);
   transition: background-color 200ms var(--ease), color 200ms var(--ease);
@@ -184,8 +192,8 @@
   }
 
   .tabs__tab {
-    font-size: calc(13 * var(--sp));
-    padding: calc(8 * var(--sp)) calc(14 * var(--sp));
+    font-size: calc(14 * var(--sp));
+    padding: calc(8 * var(--sp)) calc(12 * var(--sp));
   }
 
   .tabs__card {

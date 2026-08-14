@@ -1,9 +1,12 @@
 import { useState } from 'react'
 import { useCasesDemo } from '../../data/siteContent'
 import { tabMedia } from '../../data/assets'
+import { useReveal } from '../../hooks/useReveal'
 import './UseCasesDemo.css'
 
 function UseCasesDemo() {
+  const ref = useReveal<HTMLElement>()
+
   const [tabId, setTabId] = useState(useCasesDemo.tabs[0].id)
   const [pointIndex, setPointIndex] = useState(0)
 
@@ -16,7 +19,7 @@ function UseCasesDemo() {
   }
 
   return (
-    <section className="tabs" id="use-cases">
+    <section className="tabs reveal" ref={ref} id="use-cases">
       <div className="tabs__header">
         <h2 className="tabs__title">{useCasesDemo.title}</h2>
 

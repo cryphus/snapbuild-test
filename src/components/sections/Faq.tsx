@@ -1,12 +1,15 @@
 import { useState } from 'react'
 import { faq } from '../../data/siteContent'
+import { useReveal } from '../../hooks/useReveal'
 import './Faq.css'
 
 function Faq() {
+  const ref = useReveal<HTMLElement>()
+
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   return (
-    <section className="faq" id="faq">
+    <section className="faq reveal" ref={ref} id="faq">
       <div className="faq__header">
         <h2 className="faq__title">{faq.title}</h2>
         <p className="faq__lead">{faq.lead}</p>

@@ -1,8 +1,11 @@
 import { useRef } from 'react'
 import { roadmap } from '../../data/siteContent'
+import { useReveal } from '../../hooks/useReveal'
 import './Roadmap.css'
 
 function Roadmap() {
+  const ref = useReveal<HTMLElement>()
+
   const scrollerRef = useRef<HTMLDivElement>(null)
 
   // Перетаскивание ленты мышью — как в оригинале
@@ -32,7 +35,7 @@ function Roadmap() {
   }
 
   return (
-    <section className="rmap" id="roadmap">
+    <section className="rmap reveal" ref={ref} id="roadmap">
       <div className="rmap__header">
         <p className="rmap__eyebrow">{roadmap.eyebrow}</p>
         <h2 className="rmap__title">{roadmap.title}</h2>

@@ -1,19 +1,14 @@
 import { security } from '../../data/siteContent'
 import { images } from '../../data/assets'
+import { useReveal } from '../../hooks/useReveal'
 import './Security.css'
 
 function Security() {
+  const ref = useReveal<HTMLElement>()
+
   return (
-    <section className="safe" id="features">
-      <div className="safe__hero">
-        <h2 className="safe__title">
-          <span>Безопасность</span>
-          <span className="brand-text">без компромиссов</span>
-        </h2>
-        <p className="safe__subtitle">
-          Контроль над моделями, данными и инфраструктурой остаётся на вашей стороне
-        </p>
-      </div>
+    <section className="safe reveal" ref={ref} id="features">
+      <h2 className="safe__title">Безопасность без&nbsp;компромиссов</h2>
 
       <div className="safe__points">
         {security.cards.map((card, i) => (
@@ -21,8 +16,10 @@ function Security() {
             <div className="safe__image">
               <img src={images.security[i]} alt="" loading="lazy" />
             </div>
-            <h3 className="safe__point-title">{card.title}</h3>
-            <p className="safe__point-desc">{card.desc}</p>
+            <div className="safe__text">
+              <h3 className="safe__point-title">{card.title}</h3>
+              <p className="safe__point-desc">{card.desc}</p>
+            </div>
           </article>
         ))}
       </div>
