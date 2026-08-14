@@ -3,8 +3,9 @@
   Заголовок и переключатель периода в одну строку, три карточки,
   у среднего тарифа градиентная рамка и метка.
 */
+/* Ритм отступов и типографика — общие с остальными секциями лендинга */
 .plans {
-  padding: calc(112 * var(--sp)) var(--gutter) 0;
+  padding: calc(32 * var(--sp)) var(--gutter) calc(96 * var(--sp));
   scroll-margin-top: calc(90 * var(--sp));
 }
 
@@ -14,21 +15,21 @@
   justify-content: space-between;
   gap: calc(40 * var(--sp));
   flex-wrap: wrap;
-  margin-bottom: calc(48 * var(--sp));
+  margin-bottom: calc(40 * var(--sp));
 }
 
 .plans__title {
-  margin: 0 0 calc(14 * var(--sp));
-  font-size: calc(56 * var(--sp));
-  line-height: 1.05;
-  font-weight: 700;
+  margin: 0 0 calc(12 * var(--sp));
+  font-size: calc(52 * var(--sp));
+  line-height: 1.23;
+  font-weight: 500;
   letter-spacing: -0.02em;
 }
 
 .plans__lead {
   max-width: calc(680 * var(--sp));
-  font-size: calc(18 * var(--sp));
-  color: #8a8a8a;
+  font-size: calc(16 * var(--sp));
+  color: var(--color-text-secondary);
 }
 
 .plans__toggle {
@@ -78,14 +79,14 @@
 
 /* Градиентная рамка выделенного тарифа */
 .plans__item--highlighted {
-  border-radius: calc(26 * var(--sp));
+  border-radius: 22px;
   padding: 2px;
   background: linear-gradient(135deg, #ff8a5c, #ff5c8a 55%, #c58cff);
 }
 
 .plans__card {
   background: #fff;
-  border-radius: calc(24 * var(--sp));
+  border-radius: 20px;
   padding: calc(36 * var(--sp));
   display: flex;
   flex-direction: column;
@@ -204,11 +205,11 @@
 
 @media (max-width: 1023px) {
   .plans {
-    padding-top: calc(80 * var(--sp));
+    padding-block: calc(24 * var(--sp)) calc(72 * var(--sp));
   }
 
   .plans__title {
-    font-size: calc(44 * var(--sp));
+    font-size: calc(40 * var(--sp));
   }
 
   .plans__card {
@@ -218,15 +219,15 @@
 
 @media (max-width: 767px) {
   .plans {
-    padding-top: calc(56 * var(--sp));
+    padding-block: calc(16 * var(--sp)) calc(48 * var(--sp));
   }
 
   .plans__title {
-    font-size: calc(32 * var(--sp));
+    font-size: calc(30 * var(--sp));
   }
 
   .plans__lead {
-    font-size: calc(15 * var(--sp));
+    font-size: calc(14 * var(--sp));
   }
 
   .plans__header {

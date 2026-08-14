@@ -40,9 +40,13 @@
 .faq__item {
   background: #fafafa;
   border-radius: 20px;
-  padding: calc(20 * var(--sp));
 }
 
+/*
+  Отступы держит сама кнопка, а не карточка: так нажимается вся её
+  верхняя часть, а не только строка с текстом — иначе на телефоне
+  область попадания всего 24px.
+*/
 .faq__trigger {
   width: 100%;
   display: flex;
@@ -51,7 +55,8 @@
   gap: calc(20 * var(--sp));
   background: none;
   border: none;
-  padding: 0;
+  padding: calc(20 * var(--sp));
+  border-radius: inherit;
   text-align: left;
   font-size: calc(18 * var(--sp));
   font-weight: 400;
@@ -100,7 +105,7 @@
 }
 
 .faq__answer {
-  padding-top: calc(12 * var(--sp));
+  padding: 0 calc(20 * var(--sp)) calc(20 * var(--sp));
   color: var(--color-text-secondary);
   font-size: calc(16 * var(--sp));
   line-height: 1.5;
@@ -144,14 +149,15 @@
 
   .faq__item {
     border-radius: 16px;
-    padding: calc(16 * var(--sp));
   }
 
   .faq__trigger {
+    padding: calc(16 * var(--sp));
     font-size: calc(15 * var(--sp));
   }
 
   .faq__answer {
+    padding: 0 calc(16 * var(--sp)) calc(16 * var(--sp));
     font-size: calc(14 * var(--sp));
   }
 }

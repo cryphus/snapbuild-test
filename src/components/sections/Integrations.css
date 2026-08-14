@@ -3,24 +3,25 @@
   Заголовок слева, чипы-фильтры по категориям, сетка карточек
   с приподнятием при наведении.
 */
+/* Ритм отступов и типографика — общие с остальными секциями лендинга */
 .integr {
-  padding: calc(112 * var(--sp)) var(--gutter) 0;
+  padding: calc(32 * var(--sp)) var(--gutter) calc(96 * var(--sp));
   scroll-margin-top: calc(90 * var(--sp));
 }
 
 .integr__title {
-  margin: 0 0 calc(14 * var(--sp));
-  font-size: calc(56 * var(--sp));
-  line-height: 1.05;
-  font-weight: 700;
+  margin: 0 0 calc(12 * var(--sp));
+  font-size: calc(52 * var(--sp));
+  line-height: 1.23;
+  font-weight: 500;
   letter-spacing: -0.02em;
 }
 
 .integr__lead {
   margin: 0 0 calc(36 * var(--sp));
   max-width: calc(760 * var(--sp));
-  font-size: calc(18 * var(--sp));
-  color: #8a8a8a;
+  font-size: calc(16 * var(--sp));
+  color: var(--color-text-secondary);
 }
 
 .integr__filters {
@@ -59,7 +60,7 @@
 
 .integr__card {
   background: #fff;
-  border-radius: calc(22 * var(--sp));
+  border-radius: 20px;
   padding: calc(28 * var(--sp));
   display: flex;
   flex-direction: column;
@@ -131,11 +132,11 @@
 
 @media (max-width: 1023px) {
   .integr {
-    padding-top: calc(80 * var(--sp));
+    padding-block: calc(24 * var(--sp)) calc(72 * var(--sp));
   }
 
   .integr__title {
-    font-size: calc(44 * var(--sp));
+    font-size: calc(40 * var(--sp));
   }
 
   .integr__card {
@@ -146,15 +147,15 @@
 
 @media (max-width: 767px) {
   .integr {
-    padding-top: calc(56 * var(--sp));
+    padding-block: calc(16 * var(--sp)) calc(48 * var(--sp));
   }
 
   .integr__title {
-    font-size: calc(32 * var(--sp));
+    font-size: calc(30 * var(--sp));
   }
 
   .integr__lead {
-    font-size: calc(15 * var(--sp));
+    font-size: calc(14 * var(--sp));
     margin-bottom: calc(24 * var(--sp));
   }
 

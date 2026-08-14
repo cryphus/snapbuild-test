@@ -3,34 +3,34 @@
   Слева список ролей: у активной раскрывается описание, справа — превью
   материала со своим градиентом под каждый кейс.
 */
+/* Ритм отступов и типографика — общие с остальными секциями лендинга */
 .cases {
-  padding: calc(112 * var(--sp)) var(--gutter) 0;
+  padding: calc(32 * var(--sp)) var(--gutter) calc(96 * var(--sp));
   scroll-margin-top: calc(90 * var(--sp));
 }
 
 .cases__header {
-  max-width: calc(720 * var(--sp));
-  margin: 0 auto calc(48 * var(--sp));
-  text-align: center;
+  margin: 0 0 calc(40 * var(--sp));
 }
 
 .cases__title {
-  margin: 0 0 calc(16 * var(--sp));
-  font-size: calc(56 * var(--sp));
-  line-height: 1.05;
-  font-weight: 700;
+  margin: 0 0 calc(12 * var(--sp));
+  font-size: calc(52 * var(--sp));
+  line-height: 1.23;
+  font-weight: 500;
   letter-spacing: -0.02em;
 }
 
 .cases__lead {
-  font-size: calc(19 * var(--sp));
+  max-width: calc(760 * var(--sp));
+  font-size: calc(16 * var(--sp));
   line-height: 1.5;
-  color: #8a8a8a;
+  color: var(--color-text-secondary);
 }
 
 .cases__panel {
   background: #fff;
-  border-radius: calc(32 * var(--sp));
+  border-radius: 20px;
   padding: calc(28 * var(--sp));
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -92,7 +92,7 @@
 }
 
 .cases__preview {
-  border-radius: calc(26 * var(--sp));
+  border-radius: 20px;
   padding: calc(26 * var(--sp));
   display: flex;
   flex-direction: column;
@@ -190,16 +190,15 @@
 
 @media (max-width: 1023px) {
   .cases {
-    padding-top: calc(80 * var(--sp));
+    padding-block: calc(24 * var(--sp)) calc(72 * var(--sp));
   }
 
   .cases__title {
-    font-size: calc(44 * var(--sp));
+    font-size: calc(40 * var(--sp));
   }
 
   .cases__panel {
     grid-template-columns: 1fr;
-    border-radius: calc(24 * var(--sp));
   }
 
   .cases__preview {
@@ -213,20 +212,20 @@
 
 @media (max-width: 767px) {
   .cases {
-    padding-top: calc(56 * var(--sp));
+    padding-block: calc(16 * var(--sp)) calc(48 * var(--sp));
   }
 
   .cases__title {
-    font-size: calc(32 * var(--sp));
+    font-size: calc(30 * var(--sp));
   }
 
   .cases__lead {
-    font-size: calc(15 * var(--sp));
+    font-size: calc(14 * var(--sp));
   }
 
   .cases__panel {
     padding: calc(16 * var(--sp));
-    border-radius: calc(20 * var(--sp));
+    border-radius: 16px;
   }
 
   .cases__item {
