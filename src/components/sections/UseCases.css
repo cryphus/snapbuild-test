@@ -184,6 +184,8 @@
   background: #fff;
   border-radius: calc(9 * var(--sp));
   padding: calc(8 * var(--sp)) calc(12 * var(--sp));
+  /* рендеры светлые — без тени белая плашка на них теряется */
+  box-shadow: 0 2px 10px rgba(10, 10, 10, 0.08);
 }
 
 @media (max-width: 1023px) {
