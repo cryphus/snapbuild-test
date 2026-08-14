@@ -1,0 +1,136 @@
+.pricing__toggle {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  background: var(--color-neutral-200);
+  border-radius: var(--pill-radius);
+  padding: 4px;
+  width: fit-content;
+  margin: 0 auto 40px;
+}
+
+.pricing__toggle-btn {
+  border: none;
+  background: transparent;
+  border-radius: var(--pill-radius);
+  padding: 10px 18px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.pricing__toggle-btn.is-active {
+  background: #fff;
+  color: var(--color-text);
+  box-shadow: var(--shadow-sm);
+}
+
+.pricing__discount {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #16a34a;
+}
+
+.pricing__grid {
+  display: grid;
+  gap: var(--grid-gap);
+  grid-template-columns: 1fr;
+  align-items: stretch;
+}
+
+.pricing__card {
+  position: relative;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pricing__card--highlighted {
+  border-color: var(--color-neutral-900);
+  box-shadow: var(--shadow-md);
+}
+
+.pricing__badge {
+  position: absolute;
+  top: -12px;
+  left: 32px;
+  background: var(--color-neutral-900);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: var(--pill-radius);
+}
+
+.pricing__desc {
+  margin-top: 8px;
+  color: var(--color-neutral-500);
+  font-size: 0.9375rem;
+  min-height: 42px;
+}
+
+.pricing__price {
+  margin-top: 20px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-height: 44px;
+}
+
+.pricing__amount {
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.pricing__amount--text {
+  font-size: 1.5rem;
+}
+
+.pricing__note {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+.pricing__features {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+}
+
+.pricing__features li {
+  font-size: 0.9375rem;
+  color: var(--color-neutral-500);
+  padding-left: 24px;
+  position: relative;
+}
+
+.pricing__features li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 14px;
+  height: 8px;
+  border-left: 2px solid var(--color-neutral-900);
+  border-bottom: 2px solid var(--color-neutral-900);
+  transform: rotate(-45deg);
+}
+
+.pricing__cta {
+  margin-top: 28px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .pricing__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
