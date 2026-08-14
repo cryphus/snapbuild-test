@@ -74,7 +74,7 @@
 .integr__card {
   background: #fff;
   border: 1px solid var(--color-divider);
-  border-radius: 20px;
+  border-radius: calc(20 * var(--px));
   padding: calc(24 * var(--sp));
   display: flex;
   flex-direction: column;

@@ -78,7 +78,7 @@
 .plans__item {
   display: flex;
   padding: 2px;
-  border-radius: 22px;
+  border-radius: calc(22 * var(--px));
 }
 
 .plans__item--highlighted {
@@ -87,7 +87,7 @@
 
 .plans__card {
   background: #fff;
-  border-radius: 20px;
+  border-radius: calc(20 * var(--px));
   padding: calc(36 * var(--sp));
   display: flex;
   flex-direction: column;

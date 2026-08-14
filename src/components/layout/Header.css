@@ -16,12 +16,12 @@
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  width: min(calc(100% - 32px), 960px);
-  min-height: 52px;
-  margin: 16px auto 0;
-  padding: 7px 9px 7px 14px;
+  width: min(calc(100% - calc(32 * var(--px))), calc(960 * var(--px)));
+  min-height: calc(52 * var(--px));
+  margin: calc(16 * var(--px)) auto 0;
+  padding: calc(7 * var(--px)) calc(9 * var(--px)) calc(7 * var(--px)) calc(14 * var(--px));
   border: 1px solid transparent;
-  border-radius: 16px;
+  border-radius: calc(16 * var(--px));
   background-color: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -55,10 +55,10 @@
 }
 
 .header__link {
-  padding: 8px 10px;
-  border-radius: 9px;
+  padding: calc(8 * var(--px)) calc(10 * var(--px));
+  border-radius: calc(9 * var(--px));
   color: #000;
-  font-size: 12px;
+  font-size: calc(12 * var(--px));
   line-height: 1.4;
   font-weight: 500;
   transition: background-color 180ms ease;
@@ -72,13 +72,13 @@
   display: none;
   justify-self: end;
   align-items: center;
-  padding: 10px 20px;
-  border-radius: 12px;
+  padding: calc(10 * var(--px)) calc(20 * var(--px));
+  border-radius: calc(12 * var(--px));
   color: #fff;
   background: #000;
-  font-size: 14px;
+  font-size: calc(14 * var(--px));
   line-height: calc(20 / 14);
-  letter-spacing: -0.5px;
+  letter-spacing: calc(-0.5 * var(--px));
   font-weight: 600;
   transition: transform 180ms ease, background-color 180ms ease;
 }
@@ -94,10 +94,10 @@
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
-  gap: 5px;
-  width: 36px;
-  height: 36px;
-  padding: 0 8px;
+  gap: calc(5 * var(--px));
+  width: calc(36 * var(--px));
+  height: calc(36 * var(--px));
+  padding: 0 calc(8 * var(--px));
   background: none;
   border: none;
 }
@@ -123,10 +123,10 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-  width: calc(100% - 32px);
-  margin: 8px auto 0;
-  padding: 16px;
-  border-radius: 16px;
+  width: calc(100% - calc(32 * var(--px)));
+  margin: calc(8 * var(--px)) auto 0;
+  padding: calc(16 * var(--px));
+  border-radius: calc(16 * var(--px));
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);

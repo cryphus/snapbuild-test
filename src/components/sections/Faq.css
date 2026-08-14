@@ -39,7 +39,7 @@
 /* Каждый вопрос — отдельная карточка на светлой подложке */
 .faq__item {
   background: #fafafa;
-  border-radius: 20px;
+  border-radius: calc(20 * var(--px));
 }
 
 /*
@@ -148,7 +148,7 @@
   }
 
   .faq__item {
-    border-radius: 16px;
+    border-radius: calc(16 * var(--px));
   }
 
   .faq__trigger {

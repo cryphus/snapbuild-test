@@ -154,6 +154,6 @@
   }
 
   .compare__ring {
-    border-radius: 14px;
+    border-radius: calc(14 * var(--px));
   }
 }

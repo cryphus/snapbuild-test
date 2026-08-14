@@ -169,7 +169,7 @@
 
   .launch {
     padding-block: calc(56 * var(--sp));
-    border-radius: 16px;
+    border-radius: calc(16 * var(--px));
   }
 
   .launch__title {

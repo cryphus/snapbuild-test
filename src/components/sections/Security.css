@@ -30,7 +30,7 @@
   display: block;
   width: 100%;
   aspect-ratio: 379 / 384;
-  border-radius: 20px;
+  border-radius: calc(20 * var(--px));
   overflow: hidden;
 }
 
@@ -91,7 +91,7 @@
 
   .safe__image {
     aspect-ratio: 375 / 171.5;
-    border-radius: 6px;
+    border-radius: calc(6 * var(--px));
   }
 
   .safe__point-title {

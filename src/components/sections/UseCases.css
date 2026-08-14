@@ -30,7 +30,7 @@
 
 .cases__panel {
   background: #fff;
-  border-radius: 20px;
+  border-radius: calc(20 * var(--px));
   padding: calc(28 * var(--sp));
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -95,7 +95,7 @@
 .cases__preview {
   position: relative;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: calc(20 * var(--px));
   min-height: calc(520 * var(--sp));
 }
 
@@ -158,7 +158,7 @@
 
   .cases__panel {
     padding: calc(16 * var(--sp));
-    border-radius: 16px;
+    border-radius: calc(16 * var(--px));
   }
 
   .cases__item {
