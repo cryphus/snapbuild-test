@@ -83,17 +83,27 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+  /* отступ снизу отделяет линию-разделитель от следующего пункта */
   padding: 0 0 calc(20 * var(--sp));
+  margin-bottom: calc(16 * var(--sp));
   background: none;
   border: 0;
   text-align: left;
   cursor: pointer;
 }
 
-/* Индикатор — тонкая линия под пунктом, заливается фирменным градиентом */
+.tabs__card:last-child {
+  margin-bottom: 0;
+}
+
+/*
+  Индикатор — тонкая линия под пунктом. По умолчанию серая, у активного
+  пункта заливается фирменным градиентом за пять секунд; по окончании
+  заливки открывается следующий пункт.
+*/
 .tabs__card-progress {
   position: absolute;
-  inset: auto 0 -1px;
+  inset: auto 0 0;
   height: 1px;
   background: rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -106,11 +116,19 @@
   background: linear-gradient(90deg, #ffcdb3 0%, #ffa4b6 38%, #ffb2e9 68%, #d4d6ff 100%);
   transform: scaleX(0);
   transform-origin: 0% 50%;
-  transition: transform 450ms var(--ease);
 }
 
 .tabs__card.is-active .tabs__card-progress-fill {
-  transform: scaleX(1);
+  animation: tabs-progress 5s linear forwards;
+}
+
+@keyframes tabs-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
 }
 
 .tabs__card-title {
@@ -118,17 +136,43 @@
   font-size: calc(20 * var(--sp));
   line-height: 1.4;
   color: rgba(0, 0, 0, 0.4);
-  transition: color 200ms ease;
+  transition: color 300ms var(--ease);
 }
 
+.tabs__card:hover .tabs__card-title,
 .tabs__card.is-active .tabs__card-title {
   color: var(--color-text);
 }
 
+/*
+  Описание видно только у активного пункта. Раскрывается через
+  grid-template-rows: 0fr → 1fr — так высота анимируется плавно,
+  без фиксированной max-height.
+*/
 .tabs__card-desc {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
   font-size: calc(14 * var(--sp));
   line-height: 1.43;
   color: var(--color-text-secondary);
+  transition: grid-template-rows 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+}
+
+.tabs__card-desc > span {
+  overflow: hidden;
+}
+
+.tabs__card.is-active .tabs__card-desc {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tabs__card.is-active .tabs__card-progress-fill {
+    animation: none;
+    transform: scaleX(1);
+  }
 }
 
 .tabs__panel {
