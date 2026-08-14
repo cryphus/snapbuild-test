@@ -20,6 +20,7 @@
   --color-neutral-200: #f2f2f4;
   --color-neutral-300: #e5e5e7;
   --color-neutral-400: #a5a6ad;
+  --color-neutral-450: #6f7078;
   --color-neutral-500: #6b6c74;
   --color-neutral-800: #1a1a1a;
   --color-neutral-900: #000000;
@@ -28,7 +29,9 @@
   --color-text: #000000;
   --color-text-secondary: #5a5b62;
   --color-text-tertiary: rgba(0, 0, 0, 0.6);
-  --color-text-muted: var(--color-neutral-400);
+  /* neutral-400 не проходит контраст AA на фоне страницы для мелкого текста —
+     для функциональных лейблов (eyebrow, даты, категории) берём более тёмный оттенок */
+  --color-text-muted: var(--color-neutral-450);
 
   /* Разделители / границы */
   --color-divider: rgba(0, 0, 0, 0.08);

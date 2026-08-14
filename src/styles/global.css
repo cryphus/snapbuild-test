@@ -87,6 +87,7 @@ svg {
 /* Секция: базовые вертикальные отступы, как на исходном сайте */
 .section {
   padding-block: clamp(48px, 8vw, 96px);
+  scroll-margin-top: 84px;
 }
 
 .section--tight {
