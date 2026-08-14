@@ -12,6 +12,12 @@ export type UseCase = {
   /** Фон превью и цвет метки — свой у каждого кейса */
   gradient: string
   accent: string
+  /**
+   * 3D-рендер кейса. Файл кладётся в public/assets/renders под этим именем.
+   * Пока файла нет, превью показывает штриховую подложку — картинка
+   * подхватится сама, как только файл появится.
+   */
+  render: string
 }
 
 export const useCases = {
@@ -25,6 +31,7 @@ export const useCases = {
       caption: 'бриф кампании — 1 абзац',
       gradient: 'linear-gradient(150deg,#fff3ec,#ffe6ee 60%,#f6ecff)',
       accent: '#ff7a59',
+      render: 'case-marketing.webp',
     },
     {
       role: 'Дизайн',
@@ -33,6 +40,7 @@ export const useCases = {
       caption: 'библиотека токенов — 148 значений',
       gradient: 'linear-gradient(150deg,#fdeeff,#ffe7ef 55%,#fff2e9)',
       accent: '#ff5c8a',
+      render: 'case-design.webp',
     },
     {
       role: 'Продажи',
@@ -41,6 +49,7 @@ export const useCases = {
       caption: 'презентация 14 слайдов — превью',
       gradient: 'linear-gradient(150deg,#f4f0ff,#ede8ff 55%,#fff0f6)',
       accent: '#8b6cf0',
+      render: 'case-sales.webp',
     },
     {
       role: 'Продукт',
@@ -49,6 +58,7 @@ export const useCases = {
       caption: 'страница фичи — превью',
       gradient: 'linear-gradient(150deg,#fff5e9,#ffe9e4 55%,#f2ecff)',
       accent: '#e0703c',
+      render: 'case-product.webp',
     },
   ] satisfies UseCase[],
 }

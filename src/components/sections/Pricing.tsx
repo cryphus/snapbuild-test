@@ -46,8 +46,17 @@ function Pricing() {
 
               <p className="plans__desc">{plan.description}</p>
 
-              <div className="plans__price">{plan.price[period]}</div>
-              <div className="plans__note">{plan.note[period]}</div>
+              {/*
+                key по значению, а не по периоду: элемент пересобирается
+                только когда текст действительно поменялся, поэтому цены,
+                одинаковые для обоих периодов, не мигают впустую.
+              */}
+              <div className="plans__price" key={plan.price[period]}>
+                {plan.price[period]}
+              </div>
+              <div className="plans__note" key={plan.note[period]}>
+                {plan.note[period]}
+              </div>
 
               <div className="plans__features">
                 {plan.features.map((feature) => (

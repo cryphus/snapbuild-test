@@ -125,17 +125,38 @@
   color: #8a8a8a;
 }
 
+/* Цена и подпись подменяются с коротким проявлением снизу вверх */
 .plans__price {
   font-size: calc(44 * var(--sp));
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1;
+  animation: price-swap 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
 .plans__note {
   margin: calc(8 * var(--sp)) 0 calc(28 * var(--sp));
   font-size: calc(14 * var(--sp));
   color: #a0a0a0;
+  animation: price-swap 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) 0.05s both;
+}
+
+@keyframes price-swap {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plans__price,
+  .plans__note {
+    animation: none;
+  }
 }
 
 .plans__features {

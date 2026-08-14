@@ -5,6 +5,9 @@ const base = import.meta.env.BASE_URL
 
 export const asset = (name: string) => `${base}assets/images/${name}`
 
+/** 3D-рендеры кейсов — кладутся в public/assets/renders */
+export const renderAsset = (name: string) => `${base}assets/renders/${name}`
+
 export const images = {
   logo: asset('582db07d8ccd60da.svg'),
   heroShot: asset('hero-snapbuild-2026-08-07-v2.webp'),
