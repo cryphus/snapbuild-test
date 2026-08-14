@@ -4,27 +4,23 @@ import { useEffect, useRef } from 'react'
  * Появление блока при попадании в вьюпорт.
  *
  * Повторяет механику оригинального лендинга: элемент помечен классом
- * `reveal`, IntersectionObserver добавляет `is-visible` и отписывается,
- * так что анимация проигрывается один раз.
+ * `reveal`, при попадании в зону видимости добавляется `is-visible`.
  *
- * Контент не должен исчезнуть ни при каком сценарии, поэтому здесь две
- * подстраховки:
+ * Контент не должен пропасть ни при каком сценарии, поэтому здесь три слоя:
  *  1. скрытое состояние включается только классом `js-reveal` на <html>,
  *     который ставит сам скрипт — без JS страница видна целиком;
- *  2. если observer почему-то не присылает колбэки (встречается во
- *     встроенных webview, которые не компонуют кадры), включается
- *     резервная проверка положения блока на прокрутке.
+ *  2. основной путь — IntersectionObserver;
+ *  3. параллельно работает проверка положения на прокрутке.
+ *
+ * Третий слой обязателен: встречаются окружения (встроенные webview,
+ * которые не компонуют кадры), где observer присылает только начальный
+ * колбэк на подписку и больше не реагирует на прокрутку. Ориентироваться
+ * на факт «колбэк пришёл» нельзя — начальный приходит всегда и ничего не
+ * доказывает, поэтому резервная проверка не отключается.
+ *
+ * Оба пути идемпотентны: кто сработает первым, тот и покажет блок,
+ * после чего слушатели снимаются.
  */
-const FALLBACK_DELAY = 1600
-
-/** Убедились ли хоть раз, что IntersectionObserver реально работает. */
-let observerProven = false
-
-function isInViewport(el: HTMLElement) {
-  const rect = el.getBoundingClientRect()
-  return rect.top < window.innerHeight && rect.bottom > 0
-}
-
 export function useReveal<T extends HTMLElement = HTMLElement>() {
   const ref = useRef<T>(null)
 
@@ -36,54 +32,47 @@ export function useReveal<T extends HTMLElement = HTMLElement>() {
     const el = ref.current
     if (!el) return
 
-    const show = () => el.classList.add('is-visible')
-    const isShown = () => el.classList.contains('is-visible')
+    let done = false
 
-    if (!('IntersectionObserver' in window)) {
-      show()
-      return
+    const check = () => {
+      const rect = el.getBoundingClientRect()
+      return rect.top < window.innerHeight * 0.9 && rect.bottom > 0
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        observerProven = true
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return
-          entry.target.classList.add('is-visible')
-          observer.unobserve(entry.target)
-        })
-      },
-      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' },
-    )
-    observer.observe(el)
-
-    // Резервный путь: включается, только если observer себя не проявил
-    let onScroll: (() => void) | null = null
-    const detachScroll = () => {
-      if (!onScroll) return
+    const cleanup = () => {
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
-      onScroll = null
+      observer?.disconnect()
     }
 
-    const fallback = window.setTimeout(() => {
-      if (observerProven || isShown()) return
-
-      onScroll = () => {
-        if (!isInViewport(el)) return
-        show()
-        detachScroll()
-      }
-      window.addEventListener('scroll', onScroll, { passive: true })
-      window.addEventListener('resize', onScroll)
-      onScroll()
-    }, FALLBACK_DELAY)
-
-    return () => {
-      window.clearTimeout(fallback)
-      detachScroll()
-      observer.disconnect()
+    const show = () => {
+      if (done) return
+      done = true
+      el.classList.add('is-visible')
+      cleanup()
     }
+
+    function onScroll() {
+      if (check()) show()
+    }
+
+    const observer =
+      'IntersectionObserver' in window
+        ? new IntersectionObserver(
+            (entries) => {
+              if (entries.some((entry) => entry.isIntersecting)) show()
+            },
+            { threshold: 0.15, rootMargin: '0px 0px -40px 0px' },
+          )
+        : null
+
+    observer?.observe(el)
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    onScroll()
+
+    return cleanup
   }, [])
 
   return ref
