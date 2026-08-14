@@ -1,13 +1,10 @@
 import { platform } from '../../data/siteContent'
 import { images } from '../../data/assets'
-import { useReveal } from '../../hooks/useReveal'
 import './Platform.css'
 
 function Platform() {
-  const ref = useReveal<HTMLElement>()
-
   return (
-    <section className="steps reveal" id="process" ref={ref}>
+    <section className="steps reveal" id="process">
       <div className="steps__header">
         <h2 className="steps__title">{platform.title}</h2>
         <p className="steps__subtitle">{platform.lead}</p>

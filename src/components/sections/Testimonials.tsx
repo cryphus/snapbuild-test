@@ -1,11 +1,8 @@
 import { useState } from 'react'
 import { testimonials } from '../../data/newSections'
-import { useReveal } from '../../hooks/useReveal'
 import './Testimonials.css'
 
 function Testimonials() {
-  const ref = useReveal<HTMLElement>()
-
   const [index, setIndex] = useState(0)
   const total = testimonials.items.length
   const current = testimonials.items[index]
@@ -15,7 +12,7 @@ function Testimonials() {
   }
 
   return (
-    <section className="testimonials section reveal" ref={ref} id="testimonials">
+    <section className="testimonials section reveal" id="testimonials">
       <div className="container">
         <div className="section__header section__header--center">
           <p className="section__eyebrow">{testimonials.eyebrow}</p>

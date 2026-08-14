@@ -1,17 +1,14 @@
 import { useState } from 'react'
 import { pricing, type BillingPeriod } from '../../data/newSections'
-import { useReveal } from '../../hooks/useReveal'
 import './Pricing.css'
 
 const formatPrice = (value: number) => new Intl.NumberFormat('ru-RU').format(value)
 
 function Pricing() {
-  const ref = useReveal<HTMLElement>()
-
   const [period, setPeriod] = useState<BillingPeriod>('monthly')
 
   return (
-    <section className="pricing section reveal" ref={ref} id="pricing">
+    <section className="pricing section reveal" id="pricing">
       <div className="container">
         <div className="section__header section__header--center">
           <p className="section__eyebrow">{pricing.eyebrow}</p>

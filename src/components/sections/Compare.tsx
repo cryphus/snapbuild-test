@@ -1,12 +1,9 @@
 import { compare } from '../../data/siteContent'
-import { useReveal } from '../../hooks/useReveal'
 import './Compare.css'
 
 function Compare() {
-  const ref = useReveal<HTMLElement>()
-
   return (
-    <section className="compare reveal" id="compare" ref={ref}>
+    <section className="compare reveal" id="compare">
       <div className="compare__header">
         <h2 className="compare__title">{compare.title}</h2>
         <p className="compare__lead">{compare.lead}</p>

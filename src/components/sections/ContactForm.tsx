@@ -1,6 +1,5 @@
 import { useState, type FormEvent } from 'react'
 import { contactForm, type ContactFormValues } from '../../data/newSections'
-import { useReveal } from '../../hooks/useReveal'
 import './ContactForm.css'
 
 type Errors = Partial<Record<keyof ContactFormValues, string>>
@@ -36,8 +35,6 @@ function validate(values: ContactFormValues): Errors {
 const initialValues: ContactFormValues = { name: '', company: '', email: '', message: '' }
 
 function ContactForm() {
-  const ref = useReveal<HTMLElement>()
-
   const [values, setValues] = useState<ContactFormValues>(initialValues)
   const [errors, setErrors] = useState<Errors>({})
   const [submitted, setSubmitted] = useState(false)
@@ -65,7 +62,7 @@ function ContactForm() {
   }
 
   return (
-    <section className="contact-form section reveal" ref={ref} id="contact">
+    <section className="contact-form section reveal" id="contact">
       <div className="container">
         <div className="section__header section__header--center">
           <p className="section__eyebrow">{contactForm.eyebrow}</p>

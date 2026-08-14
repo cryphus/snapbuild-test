@@ -1,12 +1,9 @@
 import { integrations } from '../../data/newSections'
-import { useReveal } from '../../hooks/useReveal'
 import './Integrations.css'
 
 function Integrations() {
-  const ref = useReveal<HTMLElement>()
-
   return (
-    <section className="integrations section reveal" ref={ref} id="integrations">
+    <section className="integrations section reveal" id="integrations">
       <div className="container">
         <div className="section__header section__header--center">
           <p className="section__eyebrow">{integrations.eyebrow}</p>

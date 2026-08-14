@@ -196,20 +196,38 @@ a:focus-visible {
 }
 
 /*
-  Появление секций при прокрутке — механика и кривая взяты с оригинала.
-  Скрытое состояние включается только когда скрипт выставил класс
-  js-reveal на <html>: без JS страница остаётся полностью читаемой.
+  Появление секций при прокрутке — сдвиг и кривая взяты с оригинала
+  (translateY(32px), 0.9s, cubic-bezier(0.16, 1, 0.3, 1)).
+
+  Реализовано на scroll-driven анимации CSS, а не на IntersectionObserver.
+  Причина: прогресс такой анимации — чистая функция положения блока в
+  вьюпорте, поэтому «скрытым» блок остаться не может в принципе. Вариант
+  с observer давал реальную поломку: в окружениях, которые не компонуют
+  кадры (встроенные webview), колбэки не приходили и секции навсегда
+  оставались невидимыми.
+
+  Браузеры без animation-timeline просто показывают секции сразу —
+  контент не зависит от поддержки анимаций.
 */
-.js-reveal .reveal {
-  opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
-  will-change: opacity, transform;
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-in 1ms var(--ease) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
 }
 
-.js-reveal .reveal.is-visible {
-  opacity: 1;
-  transform: none;
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .visually-hidden {
@@ -231,12 +249,6 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .js-reveal .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
   *,
   *::before,
   *::after {

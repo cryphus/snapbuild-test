@@ -1,13 +1,10 @@
 import { security } from '../../data/siteContent'
 import { images } from '../../data/assets'
-import { useReveal } from '../../hooks/useReveal'
 import './Security.css'
 
 function Security() {
-  const ref = useReveal<HTMLElement>()
-
   return (
-    <section className="safe reveal" id="features" ref={ref}>
+    <section className="safe reveal" id="features">
       <div className="safe__hero">
         <h2 className="safe__title">
           <span>Безопасность</span>
