@@ -1,54 +1,239 @@
-.use-cases__grid {
-  display: grid;
-  gap: var(--grid-gap);
-  grid-template-columns: 1fr;
+/*
+  Кейсы использования — по макету «Пять блоков для лендинга».
+  Слева список ролей: у активной раскрывается описание, справа — превью
+  материала со своим градиентом под каждый кейс.
+*/
+.cases {
+  padding: calc(112 * var(--sp)) var(--gutter) 0;
+  scroll-margin-top: calc(90 * var(--sp));
 }
 
-.use-cases__card {
-  padding: 28px;
+.cases__header {
+  max-width: calc(720 * var(--sp));
+  margin: 0 auto calc(48 * var(--sp));
+  text-align: center;
+}
+
+.cases__title {
+  margin: 0 0 calc(16 * var(--sp));
+  font-size: calc(56 * var(--sp));
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.cases__lead {
+  font-size: calc(19 * var(--sp));
+  line-height: 1.5;
+  color: #8a8a8a;
+}
+
+.cases__panel {
+  background: #fff;
+  border-radius: calc(32 * var(--sp));
+  padding: calc(28 * var(--sp));
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: calc(28 * var(--sp));
+  align-items: stretch;
+}
+
+.cases__list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  padding: calc(8 * var(--sp)) calc(4 * var(--sp)) 0;
 }
 
-.use-cases__role {
-  align-self: flex-start;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--color-neutral-900);
-  background: var(--color-neutral-200);
-  border-radius: var(--pill-radius);
-  padding: 4px 12px;
+.cases__item {
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: calc(26 * var(--sp)) 0;
+  border-bottom: 1px solid #e8e8e8;
+  display: flex;
+  flex-direction: column;
+  gap: calc(8 * var(--sp));
 }
 
-.use-cases__card h3 {
-  font-size: 1.1875rem;
+.cases__item-title {
+  font-size: calc(22 * var(--sp));
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: #a0a0a0;
+  transition: color 0.3s ease;
 }
 
-.use-cases__scenario {
-  color: var(--color-neutral-500);
-  font-size: 0.9375rem;
-  flex-grow: 1;
-}
-
-.use-cases__result {
-  font-size: 0.875rem;
+.cases__item.is-active .cases__item-title {
   font-weight: 600;
-  color: var(--color-text);
-  padding-top: 12px;
-  border-top: 1px solid var(--color-divider);
+  color: #0a0a0a;
 }
 
-@media (min-width: 640px) {
-  .use-cases__grid {
-    grid-template-columns: repeat(2, 1fr);
+/* Описание раскрывается только у активной роли */
+.cases__item-desc {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  max-width: 34ch;
+  font-size: calc(15 * var(--sp));
+  line-height: 1.45;
+  color: #8a8a8a;
+  transition: grid-template-rows 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+}
+
+.cases__item-desc > span {
+  overflow: hidden;
+}
+
+.cases__item.is-active .cases__item-desc {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.cases__preview {
+  border-radius: calc(26 * var(--sp));
+  padding: calc(26 * var(--sp));
+  display: flex;
+  flex-direction: column;
+  gap: calc(20 * var(--sp));
+  min-height: calc(520 * var(--sp));
+  transition: background 0.5s ease;
+}
+
+.cases__preview-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(16 * var(--sp));
+}
+
+.cases__badge {
+  display: flex;
+  align-items: center;
+  gap: calc(9 * var(--sp));
+  background: #fff;
+  border-radius: 999px;
+  padding: calc(10 * var(--sp)) calc(16 * var(--sp));
+  font-size: calc(14 * var(--sp));
+  font-weight: 600;
+  color: #0a0a0a;
+}
+
+.cases__badge-mark {
+  width: calc(9 * var(--sp));
+  height: calc(9 * var(--sp));
+  border-radius: 3px;
+  transform: rotate(45deg);
+}
+
+.cases__counter {
+  font-size: calc(13 * var(--sp));
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: #8a8a8a;
+}
+
+.cases__canvas {
+  flex: 1;
+  border-radius: calc(20 * var(--sp));
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.65) 0 11px,
+    rgba(255, 255, 255, 0.3) 11px 22px
+  );
+  display: flex;
+  align-items: flex-end;
+  padding: calc(20 * var(--sp));
+  min-height: calc(420 * var(--sp));
+  animation: cases-rise 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes cases-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
 
-@media (min-width: 1024px) {
-  .use-cases__grid {
-    grid-template-columns: repeat(4, 1fr);
+.cases__caption {
+  font-size: calc(12 * var(--sp));
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: #6e6e6e;
+  background: #fff;
+  border-radius: calc(9 * var(--sp));
+  padding: calc(8 * var(--sp)) calc(12 * var(--sp));
+}
+
+@media (max-width: 1023px) {
+  .cases {
+    padding-top: calc(80 * var(--sp));
+  }
+
+  .cases__title {
+    font-size: calc(44 * var(--sp));
+  }
+
+  .cases__panel {
+    grid-template-columns: 1fr;
+    border-radius: calc(24 * var(--sp));
+  }
+
+  .cases__preview {
+    min-height: calc(420 * var(--sp));
+  }
+
+  .cases__canvas {
+    min-height: calc(320 * var(--sp));
+  }
+}
+
+@media (max-width: 767px) {
+  .cases {
+    padding-top: calc(56 * var(--sp));
+  }
+
+  .cases__title {
+    font-size: calc(32 * var(--sp));
+  }
+
+  .cases__lead {
+    font-size: calc(15 * var(--sp));
+  }
+
+  .cases__panel {
+    padding: calc(16 * var(--sp));
+    border-radius: calc(20 * var(--sp));
+  }
+
+  .cases__item {
+    padding: calc(18 * var(--sp)) 0;
+  }
+
+  .cases__item-title {
+    font-size: calc(18 * var(--sp));
+  }
+
+  .cases__item-desc {
+    font-size: calc(14 * var(--sp));
+    max-width: none;
+  }
+
+  .cases__preview {
+    padding: calc(16 * var(--sp));
+    min-height: 0;
+  }
+
+  .cases__canvas {
+    min-height: calc(220 * var(--sp));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cases__canvas {
+    animation: none;
   }
 }

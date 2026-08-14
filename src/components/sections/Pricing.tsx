@@ -3,81 +3,78 @@ import { pricing, type BillingPeriod } from '../../data/newSections'
 import { useReveal } from '../../hooks/useReveal'
 import './Pricing.css'
 
-const formatPrice = (value: number) => new Intl.NumberFormat('ru-RU').format(value)
-
 function Pricing() {
   const ref = useReveal<HTMLElement>()
-
-  const [period, setPeriod] = useState<BillingPeriod>('monthly')
+  const [period, setPeriod] = useState<BillingPeriod>('yearly')
 
   return (
-    <section className="pricing section reveal" ref={ref} id="pricing">
-      <div className="container">
-        <div className="section__header section__header--center">
-          <p className="section__eyebrow">{pricing.eyebrow}</p>
-          <h2>{pricing.title}</h2>
-          <p className="section__lead">{pricing.lead}</p>
+    <section className="plans reveal" id="pricing" ref={ref}>
+      <div className="plans__header">
+        <div>
+          <h2 className="plans__title">{pricing.title}</h2>
+          <p className="plans__lead">{pricing.lead}</p>
         </div>
 
-        <div className="pricing__toggle" role="group" aria-label="Период оплаты">
+        <div className="plans__toggle" role="group" aria-label="Период оплаты">
           <button
             type="button"
-            className={`pricing__toggle-btn${period === 'monthly' ? ' is-active' : ''}`}
+            className={`plans__toggle-btn${period === 'monthly' ? ' is-active' : ''}`}
             aria-pressed={period === 'monthly'}
             onClick={() => setPeriod('monthly')}
           >
-            Ежемесячно
+            Помесячно
           </button>
           <button
             type="button"
-            className={`pricing__toggle-btn${period === 'yearly' ? ' is-active' : ''}`}
+            className={`plans__toggle-btn${period === 'yearly' ? ' is-active' : ''}`}
             aria-pressed={period === 'yearly'}
             onClick={() => setPeriod('yearly')}
           >
-            Ежегодно
-            <span className="pricing__discount">{pricing.discountLabel}</span>
+            Год <span className="plans__discount">−20%</span>
           </button>
         </div>
+      </div>
 
-        <div className="pricing__grid">
-          {pricing.plans.map((plan) => {
-            const price = period === 'monthly' ? plan.priceMonthly : plan.priceYearly
-            return (
-              <article
-                key={plan.name}
-                className={`card pricing__card${plan.highlighted ? ' pricing__card--highlighted' : ''}`}
+      <div className="plans__grid">
+        {pricing.plans.map((plan) => {
+          const card = (
+            <div className="plans__card">
+              <div className="plans__card-head">
+                <h3 className="plans__name">{plan.name}</h3>
+                {plan.badge && <span className="plans__badge">{plan.badge}</span>}
+              </div>
+
+              <p className="plans__desc">{plan.description}</p>
+
+              <div className="plans__price">{plan.price[period]}</div>
+              <div className="plans__note">{plan.note[period]}</div>
+
+              <div className="plans__features">
+                {plan.features.map((feature) => (
+                  <div key={feature}>{feature}</div>
+                ))}
+              </div>
+
+              <button
+                type="button"
+                className={`plans__cta${plan.highlighted ? ' plans__cta--primary' : ''}`}
               >
-                {plan.highlighted && <span className="pricing__badge">Популярный</span>}
-                <h3>{plan.name}</h3>
-                <p className="pricing__desc">{plan.description}</p>
+                {plan.cta}
+              </button>
+            </div>
+          )
 
-                <div className="pricing__price">
-                  {price !== null ? (
-                    <>
-                      <span className="pricing__amount">{price === 0 ? '0' : formatPrice(price)}</span>
-                      <span className="pricing__note">{plan.priceNote}</span>
-                    </>
-                  ) : (
-                    <span className="pricing__amount pricing__amount--text">{plan.priceNote}</span>
-                  )}
-                </div>
-
-                <ul className="pricing__features">
-                  {plan.features.map((feature) => (
-                    <li key={feature}>{feature}</li>
-                  ))}
-                </ul>
-
-                <button
-                  type="button"
-                  className={`btn ${plan.highlighted ? 'btn-primary' : 'btn-outline'} pricing__cta`}
-                >
-                  {plan.cta}
-                </button>
-              </article>
-            )
-          })}
-        </div>
+          // У выделенного тарифа рамка сделана градиентной подложкой
+          return plan.highlighted ? (
+            <article key={plan.name} className="plans__item plans__item--highlighted">
+              {card}
+            </article>
+          ) : (
+            <article key={plan.name} className="plans__item">
+              {card}
+            </article>
+          )
+        })}
       </div>
     </section>
   )
