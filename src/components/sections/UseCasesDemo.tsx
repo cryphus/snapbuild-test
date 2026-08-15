@@ -4,7 +4,6 @@ import { tabMedia } from '../../data/assets'
 import { useReveal } from '../../hooks/useReveal'
 import './UseCasesDemo.css'
 
-/** Сколько держится один пункт, прежде чем откроется следующий. */
 const POINT_DURATION = 5000
 
 function UseCasesDemo() {
@@ -74,7 +73,6 @@ function UseCasesDemo() {
               >
                 <span className="tabs__card-title">{feature.title}</span>
 
-                {/* Описание раскрывается через grid-template-rows: 0fr → 1fr */}
                 <span className="tabs__card-desc">
                   <span>{feature.desc}</span>
                 </span>

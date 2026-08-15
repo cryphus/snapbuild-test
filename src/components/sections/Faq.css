@@ -21,7 +21,6 @@
   font-size: calc(16 * var(--sp));
 }
 
-/* Две колонки вопросов, как в оригинале */
 .faq__list {
   display: flex;
   gap: calc(32 * var(--sp));
@@ -36,7 +35,6 @@
   gap: calc(20 * var(--sp));
 }
 
-/* Каждый вопрос — отдельная карточка на светлой подложке */
 .faq__item {
   background: #fafafa;
   border-radius: calc(20 * var(--px));
@@ -131,7 +129,6 @@
     font-size: calc(40 * var(--sp));
   }
 
-  /* На узких экранах колонки складываются в одну */
   .faq__list {
     flex-direction: column;
     gap: calc(20 * var(--sp));

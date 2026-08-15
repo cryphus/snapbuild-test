@@ -3,7 +3,6 @@ import { testimonials } from '../../data/newSections'
 import { useReveal } from '../../hooks/useReveal'
 import './Testimonials.css'
 
-/** Через сколько отзыв сменяется сам */
 const AUTOPLAY_DELAY = 7000
 
 function Testimonials() {

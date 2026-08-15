@@ -73,7 +73,6 @@ function Pricing() {
             </div>
           )
 
-          // У выделенного тарифа рамка сделана градиентной подложкой
           return plan.highlighted ? (
             <article key={plan.name} className="plans__item plans__item--highlighted">
               {card}

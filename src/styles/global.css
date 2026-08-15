@@ -130,7 +130,6 @@ svg {
   color: transparent;
 }
 
-/* Кнопки */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -188,7 +187,6 @@ a:focus-visible {
   outline-offset: 2px;
 }
 
-/* Карточка */
 .card {
   background: var(--card-bg);
   border: var(--card-border-width) solid var(--card-border-color);
@@ -196,13 +194,10 @@ a:focus-visible {
 }
 
 /*
-  Плавное появление секций при прокрутке — сдвиг и кривая из оригинала.
-
-  Скрытое состояние включается классом js-reveal на <html>, который
-  скрипт ставит только после проверки, что IntersectionObserver реально
-  присылает колбэки (см. hooks/useReveal.ts). Если проверка не прошла или
-  JS не выполнился, страница показывается целиком без анимации: контент
-  не может остаться невидимым.
+  Скрытое состояние включается классом js-reveal на <html>: скрипт ставит
+  его только если браузер действительно доигрывает переходы (проба в
+  hooks/useReveal.ts). Без JS или при неудачной пробе страница видна
+  целиком — контент не может остаться невидимым.
 */
 .js-reveal .reveal {
   opacity: 0;

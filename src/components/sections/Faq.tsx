@@ -3,7 +3,6 @@ import { faq } from '../../data/siteContent'
 import { useReveal } from '../../hooks/useReveal'
 import './Faq.css'
 
-/** Оригинал раскладывает вопросы в две колонки: первая половина и вторая. */
 function splitInHalf<T>(items: T[]): [T[], T[]] {
   const middle = Math.ceil(items.length / 2)
   return [items.slice(0, middle), items.slice(middle)]

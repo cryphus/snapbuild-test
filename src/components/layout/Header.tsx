@@ -14,7 +14,6 @@ function Header() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Блокируем прокрутку страницы, пока открыто мобильное меню
   useEffect(() => {
     document.documentElement.style.overflow = menuOpen ? 'hidden' : ''
     return () => {
